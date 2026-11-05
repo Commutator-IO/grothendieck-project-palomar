@@ -1,0 +1,86 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Bigon-free dichotomy for combinatorial pseudoline arrangements"
+  description: >-
+    A combinatorial arrangement of pseudolines in the real projective plane, given as a
+    generalised map with flags labelled by lines, in which no line carries fewer than three
+    vertices, is four lines in general position or contains five lines in general position,
+    a pencil of three and a pencil of two without the line joining their centres, or the
+    complete quadrangle.
+  authors:
+    - "Michel Hua"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Michel Hua"
+
+classification:
+  arxiv: ["math.CO", "math.MG"]
+  msc2020: ["52C30", "52C40", "05C10"]
+
+sources:
+  - title: "Working notes of Alexandre Grothendieck, folder 80 (University of Montpellier), pages 20, 24 and 28"
+    authors:
+      - "Alexandre Grothendieck"
+    id: "https://grothendieck.umontpellier.fr/80.pdf"
+    type: "manuscript"
+    location: "https://grothendieck.umontpellier.fr/80.pdf"
+    relationship: "independently-proves"
+    note: "The page states the dichotomy in a box; the proof given here is not the page's."
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "Énoncés des notes de travail de Grothendieck démontrés en Lean 4, et questions ouvertes (section on pseudoline arrangements)"
+    authors:
+      - "Michel Hua"
+    id: "https://hexagonmath.org/2611.00125v1"
+    type: "preprint"
+    location: "https://hexagonmath.org/2611.00125v1"
+    relationship: "formalizes"
+    license: "CC-BY-4.0"
+    author_endorsement: "participated"
+
+status:
+  scope: >-
+    The Challenge states the boxed dichotomy of page 24 for combinatorial pseudoline
+    arrangements, defined as generalised maps with flags labelled by lines; the proof is complete.
+    The map axioms are weaker than the page's (going straight through a vertex is not assumed),
+    so the theorem is stronger than the page's. Not formalised: the numbering lemma of page 28
+    and the passage from a topological arrangement to its map.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5", "Claude Sonnet 5.5"]
+      framework: "Claude Code"
+      tool_setup: "Claude Code with the Lean language server, on Lean 4 and Mathlib; the proof was written by the model and checked by Lean."
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: "n/a"
+  spend_usd: "subscription-based"
+  notes: "The statement and the proof strategy were set by the author; the Lean text was written by a language model under his direction and kept only once Lean accepted it."
+
+fidelity:
+  divergences: "Pseudoline arrangements are replaced by their combinatorial maps, with axioms weaker than the page's; the numbering lemma of page 28 is not formalised."
+
+review:
+  status: "self-assessed"
+  reviewers:
+    - "none"
+  notes: "The statement was compared with the page by the author. No independent mathematical review."
+
+alignment:
+  namespace: "BigonFreeDichotomy"
+  statements:
+    - source: "Folder 80, page 24 (boxed statement)"
+      lean: "BigonFreeDichotomy.PseudolineMap.map_dichotomy"
+      module: "BigonFreeDichotomy.Dichotomy"
+      status: "proved"
+      note: "Stated for generalised maps with flags labelled by lines, with weaker axioms than the page's."
+
+acknowledgements: "Lean 4, Mathlib, and the Palomar template."

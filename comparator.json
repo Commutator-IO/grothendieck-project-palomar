@@ -1,0 +1,35 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "BigonFreeDichotomy.PseudolineMap.map_dichotomy"
+  ],
+  "definition_names": [
+    "BigonFreeDichotomy.C",
+    "BigonFreeDichotomy.GP4",
+    "BigonFreeDichotomy.GP5",
+    "BigonFreeDichotomy.BigonFree",
+    "BigonFreeDichotomy.IsII4",
+    "BigonFreeDichotomy.HasII5",
+    "BigonFreeDichotomy.HasII32",
+    "BigonFreeDichotomy.NC",
+    "BigonFreeDichotomy.J",
+    "BigonFreeDichotomy.HasIII6",
+    "BigonFreeDichotomy.GMap",
+    "BigonFreeDichotomy.GMap.Vtx",
+    "BigonFreeDichotomy.GMap.Edge",
+    "BigonFreeDichotomy.GMap.Face",
+    "BigonFreeDichotomy.GMap.vtx",
+    "BigonFreeDichotomy.GMap.edge",
+    "BigonFreeDichotomy.GMap.face",
+    "BigonFreeDichotomy.GMap.euler",
+    "BigonFreeDichotomy.PseudolineMap",
+    "BigonFreeDichotomy.PseudolineMap.On"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
