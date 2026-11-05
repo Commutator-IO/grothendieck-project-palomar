@@ -137,6 +137,9 @@ def On (v : X.M.Vtx) (l : L) : Prop := ∃ d, X.M.vtx d = v ∧ X.line d = l
 
 variable {X}
 
+/-- Finitely many flags: the Euler characteristic `χ = 1` is meaningful for finite maps. -/
+variable [Fintype D]
+
 
 /-- **The page's boxed statement** (pages 20, 24): every bigon-free combinatorial arrangement of
 pseudolines in the real projective plane is `II_4` or contains `II_5`, `II′_{3,2}` or
