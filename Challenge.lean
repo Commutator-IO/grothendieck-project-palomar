@@ -59,6 +59,7 @@ def J (p q : P) : Prop := ∃ m, on p m ∧ on q m
 /-- `III_6`, the complete quadrangle: four points, no three on a line, pairwise joined. -/
 def HasIII6 : Prop :=
   ∃ p q r s : P, J on p q ∧ J on p r ∧ J on p s ∧ J on q r ∧ J on q s ∧ J on r s ∧
+    NC on p q r ∧ NC on p q s ∧ NC on p r s ∧ NC on q r s
 
 end Core
 
