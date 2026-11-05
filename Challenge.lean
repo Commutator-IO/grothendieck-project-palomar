@@ -137,7 +137,7 @@ def On (v : X.M.Vtx) (l : L) : Prop := ∃ d, X.M.vtx d = v ∧ X.line d = l
 
 variable {X}
 
-/-- Finitely many flags: the Euler characteristic `χ = 1` is meaningful for finite maps. -/
+-- Finitely many flags: the Euler characteristic `χ = 1` is meaningful for finite maps.
 variable [Fintype D]
 
 
