@@ -10,10 +10,12 @@ project:
     a pencil of three and a pencil of two without the line joining their centres, or the
     complete quadrangle.
   authors:
-    - "Michel Hua"
+    - name: "Michel Hua"
+      orcid: "0009-0002-8304-0683"
   license: "Apache-2.0"
   responsible_maintainers:
-    - "Michel Hua"
+    - name: "Michel Hua"
+      orcid: "0009-0002-8304-0683"
 
 classification:
   arxiv: ["math.CO", "math.MG"]
