@@ -17,7 +17,7 @@ Finding `80-bigon-free-five-line-dichotomy`. Page 24 (boxed, announced on page 2
 The statement says that every bigon-free arrangement is of type `II_4` or contains one of the types `I′_{3,2}`, `II_5`, `III_6`.
 
 with `II′_{3,2}` the reading's name for the page's `I′_{3,2}` (a pencil of three and a pencil
-of two, without the line joining their centres).
+of two, none of the five lines joining the two centres).
 
 **The incidence core** (`dichotomy`). Lines `L`, points `P`, a relation `on`; two distinct lines
 meet in exactly one point (`meet`), every point is on at least two lines (`two`: the points are
@@ -79,8 +79,8 @@ def IsII4 : Prop := ∃ a b c d, GP4 on a b c d ∧ ∀ m, m = a ∨ m = b ∨ m
 def HasII5 : Prop := ∃ a b c d e, GP5 on a b c d e
 
 /-- `II′_{3,2}`: `a, b, c` through `p`, `d, e` not through `p`, and their meeting point on none
-of `a, b, c` (so it is the only concurrent triple of the five, and no line joins the two
-centres). -/
+of `a, b, c` (so, among these five lines, it is the only concurrent triple, and none of the five joins
+the two centres; another line of the arrangement may join them). -/
 def HasII32 : Prop :=
   ∃ a b c d e : L, a ≠ b ∧ a ≠ c ∧ b ≠ c ∧ d ≠ e ∧ ∃ p, on p a ∧ on p b ∧ on p c ∧ ¬on p d ∧
     ¬on p e ∧ ∀ q, on q d → on q e → ¬on q a ∧ ¬on q b ∧ ¬on q c

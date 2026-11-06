@@ -11,8 +11,7 @@ public section
 A combinatorial arrangement of pseudolines in the real projective plane is a generalised map
 with flags labelled by lines (`PseudolineMap`). If no line carries fewer than three vertices
 (`BigonFree`), the arrangement is four lines in general position (`IsII4`) or contains five
-lines in general position, a pencil of three and a pencil of two without the line joining
-their centres, or the complete quadrangle.
+lines in general position, a pencil of three and a pencil of two in which none of these five lines joins the two centres, or the complete quadrangle.
 -/
 
 namespace Grothendieck.Folder80Maps2
@@ -44,8 +43,8 @@ def IsII4 : Prop := ∃ a b c d, GP4 on a b c d ∧ ∀ m, m = a ∨ m = b ∨ m
 def HasII5 : Prop := ∃ a b c d e, GP5 on a b c d e
 
 /-- `II′_{3,2}`: `a, b, c` through `p`, `d, e` not through `p`, and their meeting point on none
-of `a, b, c` (so it is the only concurrent triple of the five, and no line joins the two
-centres). -/
+of `a, b, c` (so, among these five lines, it is the only concurrent triple, and none of the five joins
+the two centres; another line of the arrangement may join them). -/
 def HasII32 : Prop :=
   ∃ a b c d e : L, a ≠ b ∧ a ≠ c ∧ b ≠ c ∧ d ≠ e ∧ ∃ p, on p a ∧ on p b ∧ on p c ∧ ¬on p d ∧
     ¬on p e ∧ ∀ q, on q d → on q e → ¬on q a ∧ ¬on q b ∧ ¬on q c

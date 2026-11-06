@@ -7,7 +7,7 @@ project:
     A combinatorial arrangement of pseudolines in the real projective plane, given as a
     generalised map with flags labelled by lines, in which no line carries fewer than three
     vertices, is four lines in general position or contains five lines in general position,
-    a pencil of three and a pencil of two without the line joining their centres, or the
+    a pencil of three and a pencil of two in which none of these five lines joins the two centres, or the
     complete quadrangle.
   authors:
     - name: "Michel Hua"
