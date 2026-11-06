@@ -1,6 +1,6 @@
 name = "BigonFreeDichotomy"
 version = "0.1.0"
-defaultTargets = ["BigonFreeDichotomy", "Challenge", "Solution"]
+defaultTargets = ["BigonFreeDichotomy", "Grothendieck", "Challenge", "Solution"]
 
 [[require]]
 name = "mathlib"
@@ -18,3 +18,7 @@ roots = ["Challenge"]
 name = "Solution"
 roots = ["Solution"]
 
+
+[[lean_lib]]
+name = "Grothendieck"
+globs = ["Grothendieck.+"]
