@@ -15,7 +15,7 @@ lines in general position, a pencil of three and a pencil of two without the lin
 their centres, or the complete quadrangle.
 -/
 
-namespace BigonFreeDichotomy
+namespace Grothendieck.Folder80Maps2
 
 section Core
 
@@ -152,4 +152,4 @@ end PseudolineMap
 
 end Maps
 
-end BigonFreeDichotomy
+end Grothendieck.Folder80Maps2

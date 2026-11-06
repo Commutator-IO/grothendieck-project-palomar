@@ -75,11 +75,11 @@ review:
   notes: "The statement was compared with the page by the author. No independent mathematical review."
 
 alignment:
-  namespace: "BigonFreeDichotomy"
+  namespace: "Grothendieck.Folder80Maps2"
   statements:
     - source: "Folder 80, page 24 (boxed statement)"
-      lean: "BigonFreeDichotomy.PseudolineMap.map_dichotomy"
-      module: "BigonFreeDichotomy.Dichotomy"
+      lean: "Grothendieck.Folder80Maps2.PseudolineMap.map_dichotomy"
+      module: "Grothendieck.Folder80Maps2"
       status: "proved"
       note: "Stated for generalised maps with flags labelled by lines, with weaker axioms than the page's."
 

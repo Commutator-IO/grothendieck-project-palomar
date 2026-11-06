@@ -14,8 +14,7 @@ public import Mathlib.Algebra.BigOperators.Ring.Finset
 
 Finding `80-bigon-free-five-line-dichotomy`. Page 24 (boxed, announced on page 20):
 
-> Tout arrangement sans bigones … est soit du type `II_4`, soit contient un des types
-> `I′_{3,2}`, `II_5`, `III_6`.
+The statement says that every bigon-free arrangement is of type `II_4` or contains one of the types `I′_{3,2}`, `II_5`, `III_6`.
 
 with `II′_{3,2}` the reading's name for the page's `I′_{3,2}` (a pencil of three and a pencil
 of two, without the line joining their centres).
@@ -27,8 +26,7 @@ vertices: no bigonal line (exactly two) and no monogon (one, the pencils, where 
 bigon). If moreover some vertex is a *simple crossing* (exactly two lines through it), the
 arrangement is `II_4` or contains `II_5`, `II′_{3,2}` or `III_6`.
 
-**The maps** (`PseudolineMap`). Page 60: « une carte, topologique ou combinatoire, dont la
-surface sous-jacente est un plan projectif réel », vertices of even order `≥ 4`, lines got by
+**The maps** (`PseudolineMap`). Page 60 describes a topological or combinatorial map on a real projective plane, with vertices of even order `≥ 4`, lines got by
 going straight, two lines meeting once, each line passing once through each of its vertices.
 A combinatorial map of a possibly non-orientable surface is a generalised map (`GMap`): a
 finite set of flags with three fixed-point-free involutions `a0, a1, a2`, `a0 a2` a

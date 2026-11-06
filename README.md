@@ -7,8 +7,8 @@ flags labelled by lines) in which no line carries fewer than three vertices is f
 general position, or contains five lines in general position, a pencil of three and a pencil of
 two without the line joining their centres, or the complete quadrangle.
 
-- `Challenge.lean`: the statement, `BigonFreeDichotomy.PseudolineMap.map_dichotomy`, with its definitions.
-- `Solution.lean` and `BigonFreeDichotomy/Dichotomy.lean`: the proof, with the same definitions.
+- `Challenge.lean`: the statement, `Grothendieck.Folder80Maps2.PseudolineMap.map_dichotomy`, with its definitions.
+- `Solution.lean` and `Grothendieck/Folder80Maps2.lean`: the proof, with the same definitions; the other files of `Grothendieck/` are the other proofs of the paper.
 - `comparator.json`, `formalization.yaml`: the Comparator configuration and the metadata.
 
 The statement is the boxed one of page 24 of folder 80 of the working notes of Alexandre
