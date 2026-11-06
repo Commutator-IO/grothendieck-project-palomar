@@ -15,7 +15,6 @@
     "BigonFreeDichotomy.NC",
     "BigonFreeDichotomy.J",
     "BigonFreeDichotomy.HasIII6",
-    "BigonFreeDichotomy.GMap",
     "BigonFreeDichotomy.GMap.Vtx",
     "BigonFreeDichotomy.GMap.Edge",
     "BigonFreeDichotomy.GMap.Face",
@@ -23,7 +22,6 @@
     "BigonFreeDichotomy.GMap.edge",
     "BigonFreeDichotomy.GMap.face",
     "BigonFreeDichotomy.GMap.euler",
-    "BigonFreeDichotomy.PseudolineMap",
     "BigonFreeDichotomy.PseudolineMap.On"
   ],
   "permitted_axioms": [
