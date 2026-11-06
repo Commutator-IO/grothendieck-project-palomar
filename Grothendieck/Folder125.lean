@@ -3,7 +3,7 @@ module
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 
-public section
+@[expose] public section
 
 
 /-!

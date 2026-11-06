@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicTopology.ModelCategory.Cylinder
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
 
-public section
+@[expose] public section
 
 
 /-!

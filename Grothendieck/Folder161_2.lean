@@ -7,7 +7,7 @@ public import Mathlib.CategoryTheory.Presentable.StrongGenerator
 public import Mathlib.CategoryTheory.Presentable.Dense
 public import Mathlib.CategoryTheory.Limits.Indization.Category
 
-public section
+@[expose] public section
 
 
 /-!

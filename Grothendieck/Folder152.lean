@@ -3,7 +3,7 @@ module
 public import Mathlib.GroupTheory.Perm.Cycle.Basic
 public import Mathlib.Logic.Relation
 
-public section
+@[expose] public section
 
 
 /-!

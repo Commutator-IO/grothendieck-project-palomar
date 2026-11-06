@@ -4,7 +4,7 @@ public import Mathlib.RingTheory.Algebraic.Integral
 public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 public import Mathlib.Algebra.Group.Pointwise.Set.Basic
 
-public section
+@[expose] public section
 
 
 /-!

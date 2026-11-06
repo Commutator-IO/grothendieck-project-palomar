@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import Mathlib.Topology.Sober
 
-public section
+@[expose] public section
 
 
 /-!

@@ -3,7 +3,7 @@ module
 public import Mathlib.Tactic.NormNum
 public import Mathlib.Data.List.Basic
 
-public section
+@[expose] public section
 
 
 /-!

@@ -3,7 +3,7 @@ module
 public import Mathlib.Tactic.Ring
 public import Mathlib.Data.Rat.Init
 
-public section
+@[expose] public section
 
 
 /-!

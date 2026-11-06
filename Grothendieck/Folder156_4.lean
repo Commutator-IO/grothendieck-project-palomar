@@ -6,7 +6,7 @@ public import Mathlib.Data.List.Chain
 public import Mathlib.Data.Fintype.Powerset
 public import Mathlib.Data.Fin.VecNotation
 
-public section
+@[expose] public section
 
 
 /-!

@@ -5,7 +5,7 @@ public import Mathlib.Algebra.Polynomial.Div
 public import Mathlib.Tactic.LinearCombination
 public import Mathlib.Tactic.FinCases
 
-public section
+@[expose] public section
 
 
 /-!

@@ -6,7 +6,7 @@ public import Mathlib.Algebra.Polynomial.Eval.Defs
 public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.LinearAlgebra.Finsupp.Defs
 
-public section
+@[expose] public section
 
 
 /-!

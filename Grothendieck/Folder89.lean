@@ -7,7 +7,7 @@ public import Mathlib.Tactic.FinCases
 public import Mathlib.Data.Fin.VecNotation
 public import Mathlib.Data.Fintype.Fin
 
-public section
+@[expose] public section
 
 
 /-!

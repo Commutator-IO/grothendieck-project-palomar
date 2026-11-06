@@ -4,7 +4,7 @@ public import Mathlib.Analysis.SpecialFunctions.Elliptic.Weierstrass
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import Mathlib.RingTheory.Algebraic.Defs
 
-public section
+@[expose] public section
 
 
 /-!
