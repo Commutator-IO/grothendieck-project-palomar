@@ -1,25 +1,24 @@
-# Lean proofs of the statements of Grothendieck's working notes
+# The tangent line at a marked point on M_{0,n}: Lean proofs
 
 Lean 4 formalization, prepared for the [Palomar Registry](https://palomar-registry.org/), of the
-paper [Hua, 2026, Hexagon 2611.00125](https://hexagonmath.org/2611.00125v1), « Grothendieck
-Montpellier. Énoncés des lectures modernisées démontrés. ». The library has one
-file per folder of the working notes of Alexandre Grothendieck kept at the University of
-Montpellier, and the general lemmas they use, in `Grothendieck/Upstream/`.
+two theorems cited by the article « The tangent line at a marked point on M_{0,n}/S_{n-1}, after
+a table of Grothendieck » (Michel Hua, submitted to Hexagon on 7 November 2026). They belong to
+the Lean appendix of the paper [Hua, 2026, Hexagon 2611.00125](https://hexagonmath.org/2611.00125v1),
+« Grothendieck Montpellier. Énoncés des lectures modernisées démontrés. ».
 
-The Challenge has one headline statement per folder file, listed in `CHALLENGE.md`. The one that
-names the entry is the bigon-free dichotomy: a combinatorial arrangement of pseudolines in the real projective plane (a generalised map with
-flags labelled by lines) in which no line carries fewer than three vertices is four lines in
-general position, or contains five lines in general position, a pencil of three and a pencil of
-two in which none of these five lines joins the two centres, or the complete quadrangle.
+The Challenge states, in a homogeneous model of M_{0,n} (configurations of n vectors of K² giving
+distinct points of the projective line, and functions of weight on them), that the line bundle
+L = L_1 ⊗ … ⊗ L_n has order n − 1 for the action of the symmetric group S_n (`trivL_iff`), and
+that the tangent line L_n at the last marked point has order (n − 1)(n − 2) for the action of
+S_{n−1} (`trivLi_iff`), over any field with the relevant primitive roots of unity.
 
-- `Challenge.lean`: one headline theorem per file of `Grothendieck/`, stated with `sorry` together with the definitions it depends on, copied verbatim, in a single file that imports only Mathlib; `CHALLENGE.md` lists the choices, and the section from `Folder80Maps2` is the dichotomy above.
-- `Solution.lean` and `Grothendieck/`: the proofs of the challenged theorems, one file per folder, with the general lemmas in `Grothendieck/Upstream/`.
+- `Challenge.lean`: the two statements, `Grothendieck.Folder146.trivL_iff` and `Grothendieck.Folder146.trivLi_iff`, with their definitions, in a single file that imports only Mathlib; `CHALLENGE.md` describes them.
+- `Solution.lean` and `Grothendieck/Folder146.lean`: the proofs; the other files of `Grothendieck/` are the other proofs of the paper, built with them.
 - `comparator.json`, `formalization.yaml`: the Comparator configuration and the metadata.
 
-The dichotomy is the boxed statement of page 24 of folder 80 of the working notes of Alexandre
-Grothendieck (University of Montpellier). The proof is the one of the section on pseudoline
-arrangements in [Hua, 2026](https://hexagonmath.org/2611.00125v1). Submissions to the registry
-go through https://submit.palomar-registry.org/.
+The question comes from the table of page 70 of folder 146 of the working notes of Alexandre
+Grothendieck (University of Montpellier), which gives these orders for four points and only
+guesses for five and six. Submissions to the registry go through https://submit.palomar-registry.org/.
 
 Part of the work of the project
 [grothendieck-project](https://github.com/Commutator-IO/grothendieck-project), whose Lean files
