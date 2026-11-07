@@ -96,12 +96,12 @@ theorem mem_zbar {z : G} :
         ((QuotientGroup.eq_one_iff _).mpr (h g))
 
 /-- A central element commutes with everything, written in the order used below. -/
-private theorem central_comm {H : Type*} [Group H] {c : H} (hc : c ∈ center H) (x : H) :
+theorem central_comm {H : Type*} [Group H] {c : H} (hc : c ∈ center H) (x : H) :
     c * x = x * c :=
   (mem_center_iff.mp hc x).symm
 
 /-- Multiplying the second argument of a commutator by a central element does not change it. -/
-private theorem comm_mul_central {H : Type*} [Group H] {c : H} (hc : c ∈ center H) (g z : H) :
+theorem comm_mul_central {H : Type*} [Group H] {c : H} (hc : c ∈ center H) (g z : H) :
     ⁅g, z * c⁆ = ⁅g, z⁆ := by
   simp only [commutatorElement_def]
   calc g * (z * c) * g⁻¹ * (z * c)⁻¹ = g * z * (c * g⁻¹) * c⁻¹ * z⁻¹ := by group

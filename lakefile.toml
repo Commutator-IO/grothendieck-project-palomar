@@ -10,6 +10,7 @@ rev = "715a03a90adf491de40fbec8b456c179a623435f"
 [[lean_lib]]
 name = "Challenge"
 roots = ["Challenge"]
+globs = ["Challenge.+"]
 
 [[lean_lib]]
 name = "Solution"
