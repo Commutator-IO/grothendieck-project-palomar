@@ -26,22 +26,6 @@ universe u
 
 variable {A : Type u} [CommRing A]
 
-section PowerSeriesObstruction
-
-open PowerSeries
-
-section Discrete
-
-/-- `k = ℚ(x_i : i ∈ I)`. -/
-abbrev K (I : Type*) := FractionRing (MvPolynomial I ℚ)
-
-instance (I : Type*) : Algebra.FormallyEtale (MvPolynomial I ℚ) (K I) :=
-  Algebra.FormallyEtale.of_isLocalization (nonZeroDivisors (MvPolynomial I ℚ))
-
-end Discrete
-
-end PowerSeriesObstruction
-
 section Contre
 
 open MvPolynomial
@@ -59,8 +43,7 @@ end Contre
 
 section SeveralVariablesSmooth
 
-variable {R K : Type*} [CommRing R] [Field K] [Algebra R K] {σ : Type*} [Finite σ]
-  [DecidableEq σ]
+variable [CommRing R] {σ : Type*} [Finite σ] [DecidableEq σ]
 
 /-- **Page 23's Proposition in `n ≥ 1` variables, formal smoothness**: for a field `K` over `R`
 with `Ω_{K/R}` infinite-dimensional, `K⟦t₁, …, tₙ⟧` with the discrete topology is not formally

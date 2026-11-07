@@ -39,8 +39,6 @@ def C : SimpleGraph (Fin 27) where
     rw [(show ∀ u : Fin 27, meets u u = false by decide +kernel) u] at h
     exact Bool.false_ne_true h⟩
 
-instance : DecidableRel C.Adj := fun u v => inferInstanceAs (Decidable (meets u v = true))
-
 /-- The marked triangle `t = {a₀, b₁, c₀₁}`. -/
 def t : Finset (Fin 27) := {0, 7, 12}
 

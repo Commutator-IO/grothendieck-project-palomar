@@ -56,11 +56,6 @@ namespace InvMod
 
 variable {k}
 
-instance : Category (InvMod.{v} k) where
-  Hom := Hom
-  id X := ⟨LinearMap.id, fun _ => rfl⟩
-  comp φ ψ := ⟨ψ.f ∘ₗ φ.f, fun x => by simp [φ.comm, ψ.comm]⟩
-
 /-- The `+1`-eigenmodule `M₊ = Ker(1 - σ)`. -/
 def plus (X : InvMod.{v} k) : Submodule k X.carrier := LinearMap.ker (LinearMap.id - X.σ)
 
