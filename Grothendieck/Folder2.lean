@@ -533,7 +533,7 @@ theorem ζ_pow_ne_zero {n : ℕ} (hn : 3 ≤ n) : ζ n ^ n ≠ 0 := by
 /-- **Page 21.** For `n ≥ 3`, `φ_K : CK → GK` is surjective and not injective: `ζ^n` is a
 nonzero torsion element of `CK`, killed by `(n − 1)!`, while `GK` is torsion-free. -/
 theorem φ_not_injective {n : ℕ} (hn : 3 ≤ n) :
-    ¬ Function.Injective (φ (by omega : 1 ≤ n)) := by
+    ¬ Function.Injective (φ (Nat.le_trans (Nat.le_add_left 1 2) hn)) := by
   intro hinj
   refine ζ_pow_ne_zero hn (hinj ?_)
   rw [map_zero, map_pow, ζ, φ, Ideal.Quotient.factor_mk, ← map_pow,

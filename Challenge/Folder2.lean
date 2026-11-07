@@ -174,7 +174,7 @@ noncomputable def φ {n : ℕ} (hn : 1 ≤ n) : CK n →+* GK n := Ideal.Quotien
 /-- **Page 21.** For `n ≥ 3`, `φ_K : CK → GK` is surjective and not injective: `ζ^n` is a
 nonzero torsion element of `CK`, killed by `(n − 1)!`, while `GK` is torsion-free. -/
 theorem φ_not_injective {n : ℕ} (hn : 3 ≤ n) :
-    ¬ Function.Injective (φ (by omega : 1 ≤ n)) := by
+    ¬ Function.Injective (φ (Nat.le_trans (Nat.le_add_left 1 2) hn)) := by
   sorry
 
 end Page21
