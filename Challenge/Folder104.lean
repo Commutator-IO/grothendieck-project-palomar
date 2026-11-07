@@ -21,6 +21,7 @@ public import Mathlib.CategoryTheory.Limits.Types.Coproducts
 public import Mathlib.CategoryTheory.Limits.MonoCoprod
 public import Mathlib.CategoryTheory.Extensive
 public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib
 
 @[expose] public section
 

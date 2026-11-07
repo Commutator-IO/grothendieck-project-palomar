@@ -5,6 +5,7 @@ public import Mathlib.RingTheory.Noetherian.Nilpotent
 public import Mathlib.RingTheory.MvPowerSeries.Equiv
 public import Mathlib.RingTheory.AdicCompletion.Completeness
 public import Mathlib.RingTheory.Henselian
+public import Mathlib
 
 @[expose] public section
 

@@ -4,6 +4,7 @@ public import Mathlib.CategoryTheory.Idempotents.FunctorExtension
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.CategoryTheory.Preadditive.Opposite
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib
 
 @[expose] public section
 

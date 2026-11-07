@@ -7,6 +7,7 @@ public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Topology.Sober
 public import Mathlib.Topology.Category.TopCat.Opens
 public import Mathlib.CategoryTheory.Category.Cat
+public import Mathlib
 
 @[expose] public section
 

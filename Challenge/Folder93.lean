@@ -19,6 +19,7 @@ public import Mathlib.Data.Nat.Choose.Sum
 public import Mathlib.LinearAlgebra.Matrix.Notation
 public import Mathlib.Data.Int.GCD
 public import Mathlib.Data.Nat.Choose.Dvd
+public import Mathlib
 public import Mathlib.RingTheory.PicardGroup
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.FiniteType
