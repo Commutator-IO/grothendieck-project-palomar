@@ -9,7 +9,8 @@ theorem for the file (the headline is a definition, an instance, or a statement 
 verified), the most representative proved theorem of the file is taken; these are marked
 « representative » in the last column.
 
-`Challenge/FolderNN.lean` copies, verbatim and under the same names, the definitions,
+`Challenge.lean`, a single file that imports only Mathlib so that it compiles on its own,
+has one section per folder file: it copies, verbatim and under the same names, the definitions,
 structures and instances that the statement depends on, and states the theorem with `sorry`;
 `Solution.lean` imports the library modules that prove them, and `comparator.json` lists
 the theorems and the definitions that Comparator checks.
