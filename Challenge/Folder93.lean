@@ -40,10 +40,6 @@ local notation "D" => Polynomial.hasseDeriv
 /-- Numerator of `G₀`: `G₀(t, f) · (D⁽¹⁾f)² = (D⁽²⁾f)² − D⁽³⁾f · D⁽¹⁾f`. -/
 noncomputable def N (f : R[X]) : R[X] := D 2 f ^ 2 - D 3 f * D 1 f
 
-/-- Numerator of the classical `G = −2 f⁽³⁾/f' + 3 (f⁽²⁾/f')²`. -/
-noncomputable def Ncl (f : R[X]) : R[X] :=
-  3 * (derivative^[2] f) ^ 2 - 2 * derivative^[3] f * derivative f
-
 open CategoryTheory CochainComplex HomComplex
 
 end Grothendieck.Folder93

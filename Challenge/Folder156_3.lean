@@ -27,9 +27,6 @@ is symmetric in `a, b`, so it depends only on the pair. -/
 def SamePiece (a b s t : α) : Prop :=
   (s < a ∧ s < b ∧ t < a ∧ t < b) ∨ (Btw a s b ∧ Btw a t b) ∨ (a < s ∧ b < s ∧ a < t ∧ b < t)
 
-/-- `X_ε`, for `ε = {a, b}`: the piece of `C(ε)` containing `t` (page 15). -/
-def piece (a b t : α) : Set α := {s | InC a b s ∧ SamePiece a b s t}
-
 /-- A tronçon ordonné (page 8). -/
 structure Troncon (α : Type*) [PartialOrder α] : Prop where
   /-- a) `L_{>a}` is directed downwards. -/

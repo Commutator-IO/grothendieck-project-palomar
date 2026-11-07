@@ -26,24 +26,10 @@ universe u
 
 variable {A : Type u} [CommRing A]
 
-section Contre
-
-open MvPolynomial
-
-variable (p : ℕ)
-
-/-- `(x, y, a₁) = (X₀, X₁ᵖ + X₂ᵖ X₀, X₂ᵖ)`: with `b₀ = X₁`, `b₁ = X₂`, `a_i = b_iᵖ` and
-`y = a₀ + a₁ x`. -/
-noncomputable def triple : Fin 3 → MvPolynomial (Fin 3) (ZMod p) :=
-  ![X 0, X 1 ^ p + X 2 ^ p * X 0, X 2 ^ p]
-
-variable [hp : Fact p.Prime]
-
-end Contre
-
 section SeveralVariablesSmooth
 
-variable [CommRing R] {σ : Type*} [Finite σ] [DecidableEq σ]
+variable {R K : Type*} [CommRing R] [Field K] [Algebra R K] {σ : Type*} [Finite σ]
+  [DecidableEq σ]
 
 /-- **Page 23's Proposition in `n ≥ 1` variables, formal smoothness**: for a field `K` over `R`
 with `Ω_{K/R}` infinite-dimensional, `K⟦t₁, …, tₙ⟧` with the discrete topology is not formally

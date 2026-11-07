@@ -114,16 +114,3 @@ theorem isEffectiveDescentFlat_of_quotient (h : IsConductorIdeal S I) (hI : IsNi
 end Main
 
 end Grothendieck.Folder128.Descent
-
-namespace Grothendieck.Folder128.ColengthLocal
-
-open Module
-
-variable {A B : Type*} [CommRing A] [CommRing B] [Algebra A B] (𝔪 : Ideal A)
-
-variable (A B) in
-/-- `δ(x) = 1 ⊗ x − x ⊗ 1`, `A`-linear. -/
-noncomputable def dl : B →ₗ[A] B ⊗[A] B :=
-  TensorProduct.mk A B B 1 - (TensorProduct.mk A B B).flip 1
-
-end Grothendieck.Folder128.ColengthLocal

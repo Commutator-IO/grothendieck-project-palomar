@@ -4,22 +4,6 @@ public import Mathlib
 
 @[expose] public section
 
-namespace Folder11
-
-open TensorProduct Algebra.TensorProduct
-
-section Projection
-
-variable {k A : Type*} [CommRing k] [CommRing A] [Algebra k A] {B : Type*} [CommRing B] [Algebra k B] {I : Type*} (ι : I → A →ₐ[k] B)
-
-/-- The push-forward along the projection forgetting the new factor: `id ⊗ ∫`. -/
-noncomputable def push : B ⊗[k] A →ₗ[k] B :=
-  (TensorProduct.rid k B).toLinearMap ∘ₗ TensorProduct.map LinearMap.id D.tr
-
-end Projection
-
-end Folder11
-
 namespace Folder11.Simplicial
 
 open TensorProduct
