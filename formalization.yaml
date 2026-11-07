@@ -2,13 +2,15 @@
 version: "v0.4"
 
 project:
-  name: "Bigon-free dichotomy for combinatorial pseudoline arrangements"
+  name: "Lean proofs of the statements of Grothendieck's working notes (Hexagon 2611.00125)"
   description: >-
-    A combinatorial arrangement of pseudolines in the real projective plane, given as a
-    generalised map with flags labelled by lines, in which no line carries fewer than three
-    vertices, is four lines in general position or contains five lines in general position,
-    a pencil of three and a pencil of two in which none of these five lines joins the two centres, or the
-    complete quadrangle.
+    The Lean 4 proofs of the paper « Énoncés des notes de travail de Grothendieck démontrés en
+    Lean 4, et questions ouvertes » (Hexagon 2611.00125): statements read in the working notes of
+    Alexandre Grothendieck kept at the University of Montpellier, one file per folder, in
+    algebraic geometry, commutative algebra, category and topos theory, homotopy theory,
+    combinatorics and geometry, with the general lemmas they need. The compared Challenge is
+    one headline statement of the paper, the bigon-free dichotomy for combinatorial pseudoline
+    arrangements (folder 80, page 24); the whole library is built and checked with it.
   authors:
     - name: "Michel Hua"
       orcid: "0009-0002-8304-0683"
@@ -18,21 +20,11 @@ project:
       orcid: "0009-0002-8304-0683"
 
 classification:
-  arxiv: ["math.CO", "math.MG"]
-  msc2020: ["52C30", "52C40", "05C10"]
+  arxiv: ["math.AG", "math.CT", "math.AC", "math.CO", "math.HO"]
+  msc2020: ["03B35", "14-03", "18-03", "52C30", "01A60"]
 
 sources:
-  - title: "Working notes of Alexandre Grothendieck, folder 80 (University of Montpellier), pages 20, 24 and 28"
-    authors:
-      - "Alexandre Grothendieck"
-    id: "https://grothendieck.umontpellier.fr/80.pdf"
-    type: "manuscript"
-    location: "https://grothendieck.umontpellier.fr/80.pdf"
-    relationship: "independently-proves"
-    note: "The page states the dichotomy in a box; the proof given here is not the page's."
-    license: "unknown"
-    author_endorsement: "n/a"
-  - title: "Énoncés des notes de travail de Grothendieck démontrés en Lean 4, et questions ouvertes (section on pseudoline arrangements)"
+  - title: "Énoncés des notes de travail de Grothendieck démontrés en Lean 4, et questions ouvertes"
     authors:
       - "Michel Hua"
     id: "https://hexagonmath.org/2611.00125v1"
@@ -41,10 +33,20 @@ sources:
     relationship: "formalizes"
     license: "CC-BY-4.0"
     author_endorsement: "participated"
-
+  - title: "Working notes of Alexandre Grothendieck (University of Montpellier); the Challenge is from folder 80, pages 20, 24 and 28"
+    authors:
+      - "Alexandre Grothendieck"
+    id: "https://grothendieck.umontpellier.fr/"
+    type: "manuscript"
+    location: "https://grothendieck.umontpellier.fr/"
+    relationship: "independently-proves"
+    note: "The folders state the results; the proofs are the paper's. For the Challenge, page 24 of folder 80 states the dichotomy in a box, and the proof is not the page's."
+    license: "unknown"
+    author_endorsement: "n/a"
 status:
   scope: >-
-    The Challenge states the boxed dichotomy of page 24 for combinatorial pseudoline
+    The library holds the Lean proofs of the Hexagon paper 2611.00125, one file per folder of the
+    working notes, and the general lemmas they use (Grothendieck/Upstream). The Challenge states the boxed dichotomy of page 24 for combinatorial pseudoline
     arrangements, defined as generalised maps with flags labelled by lines; the proof is complete.
     The map axioms are weaker than the page's (going straight through a vertex is not assumed),
     so the theorem is stronger than the page's. Not formalised: the numbering lemma of page 28
