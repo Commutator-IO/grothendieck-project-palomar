@@ -1,101 +1,14 @@
 module
 
-public import Grothendieck.Folder1
-public import Grothendieck.Folder2
-public import Grothendieck.Folder5
-public import Grothendieck.Folder10
-public import Grothendieck.Folder11
-public import Grothendieck.Folder13
-public import Grothendieck.Folder16
-public import Grothendieck.Folder19
-public import Grothendieck.Folder21
-public import Grothendieck.Folder22
-public import Grothendieck.Folder29
-public import Grothendieck.Folder37
-public import Grothendieck.Folder39
-public import Grothendieck.Folder40
-public import Grothendieck.Folder41
-public import Grothendieck.Folder42
-public import Grothendieck.Folder43
-public import Grothendieck.Folder44
-public import Grothendieck.Folder46
-public import Grothendieck.Folder50
-public import Grothendieck.Folder53
-public import Grothendieck.Folder55
-public import Grothendieck.Folder62
-public import Grothendieck.Folder63
-public import Grothendieck.Folder64
-public import Grothendieck.Folder67
-public import Grothendieck.Folder68
-public import Grothendieck.Folder69
-public import Grothendieck.Folder70
-public import Grothendieck.Folder72
-public import Grothendieck.Folder73
-public import Grothendieck.Folder74
-public import Grothendieck.Folder76
-public import Grothendieck.Folder77
-public import Grothendieck.Folder78
-public import Grothendieck.Folder79
-public import Grothendieck.Folder80
-public import Grothendieck.Folder80Maps1
 public import Grothendieck.Folder80Maps2
-public import Grothendieck.Folder80Maps3
-public import Grothendieck.Folder80Signs
-public import Grothendieck.Folder82
-public import Grothendieck.Folder83
-public import Grothendieck.Folder84
-public import Grothendieck.Folder85
-public import Grothendieck.Folder86
-public import Grothendieck.Folder88
-public import Grothendieck.Folder89
-public import Grothendieck.Folder90
-public import Grothendieck.Folder90Comodules
-public import Grothendieck.Folder93
-public import Grothendieck.Folder94
-public import Grothendieck.Folder98
-public import Grothendieck.Folder100
-public import Grothendieck.Folder101
-public import Grothendieck.Folder104
-public import Grothendieck.Folder106
-public import Grothendieck.Folder107
-public import Grothendieck.Folder113
-public import Grothendieck.Folder114
-public import Grothendieck.Folder115
-public import Grothendieck.Folder118
-public import Grothendieck.Folder120
-public import Grothendieck.Folder121
-public import Grothendieck.Folder123Kostant
-public import Grothendieck.Folder125
-public import Grothendieck.Folder128
-public import Grothendieck.Folder133
-public import Grothendieck.Folder136
-public import Grothendieck.Folder137
-public import Grothendieck.Folder140_1
-public import Grothendieck.Folder145
-public import Grothendieck.Folder146
-public import Grothendieck.Folder147
-public import Grothendieck.Folder148
-public import Grothendieck.Folder148Chart
-public import Grothendieck.Folder150
-public import Grothendieck.Folder151
-public import Grothendieck.Folder152
-public import Grothendieck.Folder153
-public import Grothendieck.Folder154
-public import Grothendieck.Folder155
-public import Grothendieck.Folder156_1
-public import Grothendieck.Folder156_2
-public import Grothendieck.Folder156_3
-public import Grothendieck.Folder156_4
-public import Grothendieck.Folder158
-public import Grothendieck.Folder160
-public import Grothendieck.Folder161_1
-public import Grothendieck.Folder161_2
-public import Grothendieck.Folder161_3
+
+public section
 
 /-!
 # Proved solution
 
-The proofs of the headline theorems stated in `Challenge.lean`, one per file of `Grothendieck/`,
-with the same definitions. Comparator checks that each theorem of `comparator.json` has the
-statement of its counterpart in `Challenge.lean` and uses only the permitted axioms.
+The proof, with the same definitions as `Challenge.lean`, is in
+`Grothendieck/Folder80Maps2.lean`, imported here. Comparator checks that
+`Grothendieck.Folder80Maps2.PseudolineMap.map_dichotomy` has the statement of its counterpart in
+`Challenge.lean` and uses only the permitted axioms.
 -/
