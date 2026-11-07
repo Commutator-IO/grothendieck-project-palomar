@@ -6,6 +6,7 @@ public import Mathlib.Combinatorics.SimpleGraph.Maps
 public import Mathlib.Data.Fintype.Perm
 public import Mathlib.Data.Fin.VecNotation
 public import Mathlib.GroupTheory.SpecificGroups.Quaternion
+public import Mathlib.Tactic.Group
 
 @[expose] public section
 

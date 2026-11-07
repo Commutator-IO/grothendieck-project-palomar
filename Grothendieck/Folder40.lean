@@ -449,6 +449,7 @@ theorem root_add_pow_E (c : E (k := k) p) : (AdjoinRoot.root _ + c) ^ p = c ^ p 
   rw [eval₂_X_pow] at hr
   rw [add_pow_char, hr, zero_add]
 
+set_option backward.proofsInPublic true in
 /-- `C₂ → C₁[T]/(T^p)`, `t ↦ T + b`. -/
 noncomputable def C₂toE : C₂ (k := k) p →ₐ[PowerSeries k] E (k := k) p :=
   AdjoinRoot.liftAlgHom _ (Algebra.ofId _ _) (AdjoinRoot.root _ + algebraMap _ _ (b p)) (by

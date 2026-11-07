@@ -1093,6 +1093,7 @@ lemma lex_mono (F : Lex k B) (L : Perf k) : Mono (F.obj.map (ιP L)) := by
   obtain ⟨w, ⟨hl⟩⟩ := F.property.2.2 _ _ (isSigma_cone L)
   exact Fork.IsLimit.mono hl
 
+set_option backward.proofsInPublic true in
 /-- The kernel property of `F(L) → F(I(L)) → F(L[1])`. -/
 def lexLimit (F : Lex k B) (L : Perf k) :
     IsLimit (KernelFork.ofι (F.obj.map (ιP L)) (by

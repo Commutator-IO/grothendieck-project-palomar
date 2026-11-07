@@ -2143,6 +2143,7 @@ open Polynomial
 
 variable {R : Type*} [CommRing R] (b c : R)
 
+set_option backward.proofsInPublic true in
 /-- The basis `(1, U)` of `R[U]/(U² + bU + c)`. -/
 noncomputable def qbasis : Module.Basis (Fin 2) R (QAlg b c) :=
   .mk (v := ![1, AdjoinRoot.root (qpoly b c)])

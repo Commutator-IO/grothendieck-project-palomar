@@ -13,6 +13,8 @@ public import Mathlib.Algebra.MvPolynomial.Expand
 public import Mathlib.Algebra.CharP.Frobenius
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.RingTheory.PowerSeries.Substitution
+public import Mathlib.LinearAlgebra.TensorProduct.Pi
+public import Mathlib.Algebra.FiveLemma
 
 @[expose] public section
 
