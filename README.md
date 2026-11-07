@@ -1,8 +1,8 @@
 # Lean proofs of the statements of Grothendieck's working notes
 
 Lean 4 formalization, prepared for the [Palomar Registry](https://palomar-registry.org/), of the
-paper [Hua, 2026, Hexagon 2611.00125](https://hexagonmath.org/2611.00125v1), « Énoncés des notes
-de travail de Grothendieck démontrés en Lean 4, et questions ouvertes ». The library has one
+paper [Hua, 2026, Hexagon 2611.00125](https://hexagonmath.org/2611.00125v1), « Grothendieck
+Montpellier. Énoncés des lectures modernisées démontrés. ». The library has one
 file per folder of the working notes of Alexandre Grothendieck kept at the University of
 Montpellier, and the general lemmas they use, in `Grothendieck/Upstream/`.
 

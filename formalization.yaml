@@ -4,13 +4,13 @@ version: "v0.4"
 project:
   name: "Lean proofs of the statements of Grothendieck's working notes (Hexagon 2611.00125)"
   description: >-
-    The Lean 4 proofs of the paper « Énoncés des notes de travail de Grothendieck démontrés en
-    Lean 4, et questions ouvertes » (Hexagon 2611.00125): statements read in the working notes of
+    The Lean 4 proofs of the paper « Grothendieck Montpellier. Énoncés des lectures modernisées
+    démontrés. » (Hexagon 2611.00125): statements read in the working notes of
     Alexandre Grothendieck kept at the University of Montpellier, one file per folder, in
     algebraic geometry, commutative algebra, category and topos theory, homotopy theory,
-    combinatorics and geometry, with the general lemmas they need. The compared Challenge is
-    one headline statement of the paper, the bigon-free dichotomy for combinatorial pseudoline
-    arrangements (folder 80, page 24); the whole library is built and checked with it.
+    combinatorics and geometry, with the general lemmas they need. The compared Challenge has
+    one headline theorem per proof file, 91 in all (CHALLENGE.md lists the choices), among them
+    the bigon-free dichotomy for combinatorial pseudoline arrangements (folder 80, page 24).
   authors:
     - name: "Michel Hua"
       orcid: "0009-0002-8304-0683"
@@ -24,7 +24,7 @@ classification:
   msc2020: ["03B35", "14-03", "18-03", "52C30", "01A60"]
 
 sources:
-  - title: "Énoncés des notes de travail de Grothendieck démontrés en Lean 4, et questions ouvertes"
+  - title: "Grothendieck Montpellier. Énoncés des lectures modernisées démontrés."
     authors:
       - "Michel Hua"
     id: "https://hexagonmath.org/2611.00125v1"
@@ -33,24 +33,25 @@ sources:
     relationship: "formalizes"
     license: "CC-BY-4.0"
     author_endorsement: "participated"
-  - title: "Working notes of Alexandre Grothendieck (University of Montpellier); the Challenge is from folder 80, pages 20, 24 and 28"
+  - title: "Working notes of Alexandre Grothendieck (University of Montpellier); the Challenge takes one statement per folder file"
     authors:
       - "Alexandre Grothendieck"
     id: "https://grothendieck.umontpellier.fr/"
     type: "manuscript"
     location: "https://grothendieck.umontpellier.fr/"
     relationship: "independently-proves"
-    note: "The folders state the results; the proofs are the paper's. For the Challenge, page 24 of folder 80 states the dichotomy in a box, and the proof is not the page's."
+    note: "The folders state the results; the proofs are the paper's. CHALLENGE.md gives, for each Challenge statement, the folder, the page and the section of the paper."
     license: "unknown"
     author_endorsement: "n/a"
 status:
   scope: >-
     The library holds the Lean proofs of the Hexagon paper 2611.00125, one file per folder of the
-    working notes, and the general lemmas they use (Grothendieck/Upstream). The Challenge states the boxed dichotomy of page 24 for combinatorial pseudoline
-    arrangements, defined as generalised maps with flags labelled by lines; the proof is complete.
-    The map axioms are weaker than the page's (going straight through a vertex is not assumed),
-    so the theorem is stronger than the page's. Not formalised: the numbering lemma of page 28
-    and the passage from a topological arrangement to its map.
+    working notes, and the general lemmas they use (Grothendieck/Upstream). The Challenge states
+    one headline theorem per proof file, 91 in all; Folder18 is left out because it states a
+    conjecture as a definition and proves no theorem. 23 statements are representative choices
+    where the paper has no single proved theorem for a folder (CHALLENGE.md). Definitions the
+    statements depend on are copied verbatim and compared by type. All proofs are complete.
+    Statements the paper reports without a Lean check are not in the library.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: []
@@ -76,10 +77,10 @@ review:
   status: "self-assessed"
   reviewers:
     - "none"
-  notes: "The statement was compared with the page by the author. No independent mathematical review."
+  notes: "The statements are those of the paper; the bigon-free dichotomy was compared with the page by the author, the others were not each re-read against the pages. No independent mathematical review."
 
 alignment:
-  namespace: "Grothendieck.Folder80Maps2"
+  namespace: "Grothendieck"
   statements:
     - source: "Folder 1, pages 71 to 73"
       lean: "Grothendieck.Folder1.sigma_system"
