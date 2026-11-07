@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Data.Fintype.Prod
 public import Mathlib.Data.Fintype.Sum

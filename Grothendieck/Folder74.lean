@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Combinatorics.SimpleGraph.Basic
 public import Mathlib.Combinatorics.SimpleGraph.Maps
 public import Mathlib.SetTheory.Cardinal.Finite

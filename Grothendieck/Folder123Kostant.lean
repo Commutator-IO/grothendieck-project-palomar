@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Data.Nat.Totient
 public import Mathlib.Data.Nat.Factorial.Basic
 public import Mathlib.Tactic.NormNum

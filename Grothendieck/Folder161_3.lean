@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Topology.Sets.Opens
 public import Mathlib.Topology.LocallyClosed
 public import Mathlib.Topology.Sober

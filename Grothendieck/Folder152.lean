@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.GroupTheory.Perm.Cycle.Basic
 public import Mathlib.Logic.Relation
 

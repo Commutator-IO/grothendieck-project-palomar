@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.CategoryTheory.Localization.Construction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal

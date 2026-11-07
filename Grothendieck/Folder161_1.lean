@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.CategoryTheory.Localization.Bousfield
 public import Mathlib.CategoryTheory.Types.Basic
 public import Mathlib.CategoryTheory.Discrete.Basic

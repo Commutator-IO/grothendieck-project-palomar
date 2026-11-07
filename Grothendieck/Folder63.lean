@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.Algebra.Polynomial.Div
 public import Mathlib.Tactic.LinearCombination

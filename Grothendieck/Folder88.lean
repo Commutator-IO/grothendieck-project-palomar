@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.GroupTheory.OrderOfElement
 public import Mathlib.GroupTheory.GroupAction.Defs
 public import Mathlib.Algebra.Group.End

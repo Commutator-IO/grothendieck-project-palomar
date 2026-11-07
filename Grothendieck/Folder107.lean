@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.AlgebraicTopology.ModelCategory.Basic
 public import Mathlib.AlgebraicTopology.ModelCategory.Cylinder
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback

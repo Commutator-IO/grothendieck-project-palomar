@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Topology.Sober
 public import Mathlib.Topology.Constructions
 

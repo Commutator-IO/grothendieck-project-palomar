@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.GroupTheory.Index
 public import Mathlib.GroupTheory.GroupAction.Quotient
 public import Mathlib.Combinatorics.SimpleGraph.Maps

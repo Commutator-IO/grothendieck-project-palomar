@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Grothendieck.Folder80Maps3
 
 @[expose] public section

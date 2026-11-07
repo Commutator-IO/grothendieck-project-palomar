@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Order.Basic
 public import Mathlib.Data.Set.Lattice.Indexed
 public import Mathlib.Data.List.Chain

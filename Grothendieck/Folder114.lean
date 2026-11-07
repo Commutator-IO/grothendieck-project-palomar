@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.CategoryTheory.ConnectedComponents
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Basic
 public import Mathlib.CategoryTheory.Limits.IsConnected

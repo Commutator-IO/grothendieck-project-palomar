@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.Flat.Tensor
 public import Mathlib.LinearAlgebra.TensorProduct.Prod

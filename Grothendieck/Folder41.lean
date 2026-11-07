@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 public import Mathlib.Topology.Sober
 

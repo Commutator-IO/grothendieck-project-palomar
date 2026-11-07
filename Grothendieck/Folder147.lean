@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Tactic.Ring
 public import Mathlib.Data.Rat.Init
 

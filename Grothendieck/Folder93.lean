@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Algebra.Polynomial.HasseDeriv
 public import Mathlib.Tactic.LinearCombination
 public import Mathlib.Data.Nat.Choose.Lucas

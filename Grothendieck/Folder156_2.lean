@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Order.Filter.Germ.Basic
 public import Mathlib.Order.Filter.Ultrafilter.Basic
 public import Mathlib.Topology.Sets.Closeds

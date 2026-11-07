@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.FieldTheory.PerfectClosure
 public import Mathlib.Algebra.CharP.Frobenius
 public import Mathlib.Algebra.Polynomial.Eval.Defs

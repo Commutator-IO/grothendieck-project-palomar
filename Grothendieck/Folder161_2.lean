@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.CategoryTheory.Monad.Monadicity
 public import Mathlib.CategoryTheory.Monad.Comonadicity
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite

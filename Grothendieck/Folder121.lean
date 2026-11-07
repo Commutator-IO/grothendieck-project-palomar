@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Topology.Closure
 public import Mathlib.Data.Finset.Powerset
 public import Mathlib.Order.WellFounded

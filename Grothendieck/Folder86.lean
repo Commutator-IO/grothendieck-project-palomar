@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Data.Fintype.Basic
 public import Mathlib.Data.List.FinRange
 public import Mathlib.Algebra.Order.Group.End

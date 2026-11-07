@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Data.Set.Card
 public import Mathlib.Data.Multiset.Bind
 public import Mathlib.GroupTheory.Perm.Basic

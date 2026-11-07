@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.CategoryTheory.Subobject.Basic
 public import Mathlib.AlgebraicTopology.Reedy.Basic
 public import Mathlib.SetTheory.Ordinal.Rank

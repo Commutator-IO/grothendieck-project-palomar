@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.RingTheory.PowerSeries.WeierstrassPreparation
 public import Mathlib.RingTheory.Noetherian.Nilpotent
 public import Mathlib.RingTheory.MvPowerSeries.Equiv

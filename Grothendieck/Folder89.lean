@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Algebra.Group.Units.Basic
 public import Mathlib.Tactic.LinearCombination
 public import Mathlib.Tactic.Ring

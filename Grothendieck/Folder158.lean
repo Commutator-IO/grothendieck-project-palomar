@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.Algebra.Group.End
 public import Mathlib.Data.Fintype.Card
 public import Mathlib.Data.Set.Card

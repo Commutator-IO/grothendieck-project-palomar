@@ -1,5 +1,6 @@
 module
 
+public import Mathlib
 public import Mathlib.LinearAlgebra.Matrix.Trace
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
