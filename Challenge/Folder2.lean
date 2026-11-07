@@ -19,6 +19,8 @@ noncomputable def lin (w : Aˣ) (a : A) : A⟦X⟧ˣ :=
   (show IsUnit (C (w : A) - C a * X : A⟦X⟧) from
     isUnit_iff_constantCoeff.2 (by simp)).unit
 
+@[simp] theorem coe_lin (w : Aˣ) (a : A) : (lin w a : A⟦X⟧) = C (w : A) - C a * X := rfl
+
 /-- The product `∏_{i=0}^{r} u_i ^ ((−1)^i binom(r, i))`. -/
 noncomputable def altProd (r : ℕ) (u : ℕ → A⟦X⟧ˣ) : A⟦X⟧ˣ :=
   ∏ i ∈ range (r + 1), u i ^ ε r i

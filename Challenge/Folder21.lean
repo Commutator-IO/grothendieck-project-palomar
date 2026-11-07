@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Category.Cat
 
 @[expose] public section
 
-open CategoryTheory TopologicalSpace Opposite
+open CategoryTheory Opposite
 
 namespace Grothendieck.Folder21.Stack
 

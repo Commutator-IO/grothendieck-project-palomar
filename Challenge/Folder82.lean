@@ -21,6 +21,8 @@ abbrev Sl2 (R : Type*) [CommRing R] := sl (Fin 2) R
 def slMk (x y z : R) : Sl2 R :=
   ⟨coord x y z, by simp [LieAlgebra.SpecialLinear.sl, coord, trace_fin_two]⟩
 
+@[simp] theorem slMk_val (x y z : R) : (slMk x y z).val = coord x y z := rfl
+
 theorem slMk_eta (u : Sl2 R) : u = slMk (u.val 0 1) (u.val 1 0) (u.val 0 0) := by
   have h : u.val.trace = 0 := u.2
   rw [trace_fin_two] at h

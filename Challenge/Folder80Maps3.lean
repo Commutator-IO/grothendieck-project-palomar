@@ -83,6 +83,22 @@ variable {X}
 
 variable [Fintype D]
 
+section Chains
+
+open Matrix
+
+variable (X) in
+/-- The vertex `v` is an end of the edge `e`. -/
+def Inc (v : X.M.Vtx) (e : X.M.Edge) : Prop := ∃ d, X.M.vtx d = v ∧ X.M.edge d = e
+
+variable (X) in
+/-- The line of an edge. -/
+def lineE : X.M.Edge → L :=
+  Quot.lift X.line fun x _ h => h.elim (fun h => h ▸ (X.line_a0 x).symm) fun h =>
+    h ▸ (X.line_a2 x).symm
+
+end Chains
+
 variable (X) in
 /-- The rotation `φ = a2 a1` around a vertex: from an edge-end to the next one. -/
 def phi : Equiv.Perm D :=
@@ -120,6 +136,14 @@ structure SkelIso where
   fL : L ≃ L'
   inc : ∀ v e, X.Inc v e ↔ X'.Inc (fV v) (fE e)
   line : ∀ e, X'.lineE (fE e) = fL (X.lineE e)
+
+/-- The inverse isomorphism of skeletons. -/
+def SkelIso.symm (f : SkelIso X X') : SkelIso X' X where
+  fV := f.fV.symm
+  fE := f.fE.symm
+  fL := f.fL.symm
+  inc v e := by rw [f.inc]; simp
+  line e := by rw [Equiv.eq_symm_apply, ← f.line]; simp
 
 /-- **Fullness reduces to face paths.** An isomorphism of decomposed skeletons of two bigon-free
 arrangements comes from an isomorphism of the arrangements (a bijection of flags commuting with

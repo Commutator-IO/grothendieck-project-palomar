@@ -77,6 +77,27 @@ def IsEffectiveDescentFlat : Prop :=
 
 end Defs
 
+section Reduction
+
+variable {A S : Type u} [CommRing A] [CommRing S] [Algebra A S]
+
+variable (S) in
+/-- `I` is an ideal of `A` mapped injectively onto an ideal of `S` (Grothendieck, page 1): `I`
+lies in the conductor, and `A → S`, `A/I → S/IS` is a Milnor square. -/
+structure IsConductorIdeal (I : Ideal A) : Prop where
+  inj : ∀ x ∈ I, algebraMap A S x = 0 → x = 0
+  ideal : ∀ x ∈ I, ∀ b : S, ∃ y ∈ I, b * algebraMap A S x = algebraMap A S y
+
+variable {I : Ideal A}
+
+variable (I) {N : Type u} [AddCommGroup N] [Module A N]
+  {M₀ : Type u} [AddCommMonoid M₀] [Module (A ⧸ I) M₀] [Module A M₀]
+  [IsScalarTower A (A ⧸ I) M₀]
+
+variable {I}
+
+end Reduction
+
 section Main
 
 variable {A S : Type u} [CommRing A] [CommRing S] [Algebra A S] {I : Ideal A}
@@ -93,3 +114,16 @@ theorem isEffectiveDescentFlat_of_quotient (h : IsConductorIdeal S I) (hI : IsNi
 end Main
 
 end Grothendieck.Folder128.Descent
+
+namespace Grothendieck.Folder128.ColengthLocal
+
+open Module
+
+variable {A B : Type*} [CommRing A] [CommRing B] [Algebra A B] (𝔪 : Ideal A)
+
+variable (A B) in
+/-- `δ(x) = 1 ⊗ x − x ⊗ 1`, `A`-linear. -/
+noncomputable def dl : B →ₗ[A] B ⊗[A] B :=
+  TensorProduct.mk A B B 1 - (TensorProduct.mk A B B).flip 1
+
+end Grothendieck.Folder128.ColengthLocal

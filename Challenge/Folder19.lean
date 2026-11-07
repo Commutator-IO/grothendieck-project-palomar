@@ -152,6 +152,23 @@ theorem comult_matrice (X : ∀ i, B i) (k j i : I) :
   have h3 := congrArg (f k).map (h1.trans h2.symm)
   exact (((f k).map_comp _ _).symm.trans h3).trans ((f k).map_comp _ _)
 
+section PleinementFideles
+
+omit [HasProductsOfShape I A] in
+/-- If `g_i` is fully faithful, the diagonal entry `φ_ii = f_i g_i` is the identity
+(through the counit). -/
+noncomputable def diagIso (i : I) [(g i).Full] [(g i).Faithful] : phi f g i i ≅ 𝟭 (B i) :=
+  asIso (adj i).counit
+
+omit [HasProductsOfShape I A] in
+/-- (3.11 b), (3.14) The unit `λ' : id_{B_i} → φ_ij φ_ji` (`i ≠ j`) when `g_i` is
+fully faithful: `λ_iji` read through `φ_ii ≅ id`. -/
+noncomputable def lamUnit (i j : I) [(g i).Full] [(g i).Faithful] :
+    𝟭 (B i) ⟶ phi f g j i ⋙ phi f g i j :=
+  (diagIso f g adj i).inv ≫ lam f g adj i j i
+
+end PleinementFideles
+
 end BaseProduit
 
 section MatriceRelations

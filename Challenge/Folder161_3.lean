@@ -8,7 +8,7 @@ public import Mathlib.Topology.Sober
 
 namespace Grothendieck.Folder161_3
 
-open TopologicalSpace Set
+open Set
 
 /-- The page's hypothesis: every nonempty locally closed `Z ⊆ X` has a point `x`
 with a quasi-compact neighbourhood `T` in `Z`, i.e. `O ∩ Z ⊆ T ⊆ Z` for an
@@ -37,8 +37,6 @@ theorem covering (hG : HypG X) (S : CIdeal X Y) (U : Opens X) (V : Opens Y)
     (h : (U : Set X) ×ˢ (V : Set Y) ⊆ ⋃ p ∈ S.carrier, (p.1 : Set X) ×ˢ (p.2 : Set Y)) :
     (U, V) ∈ S.carrier := by
   sorry
-
-open CIdeal
 
 open Function (eval update update_of_ne update_self)
 

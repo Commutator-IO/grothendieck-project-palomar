@@ -35,6 +35,11 @@ def produitRep {A : Type u} [Category.{u} A] (a b : A) : Aᵒᵖ ⥤ Type u wher
   obj c := (c.unop ⟶ a) × (c.unop ⟶ b)
   map f := TypeCat.ofHom fun x => (f.unop ≫ x.1, f.unop ≫ x.2)
 
+@[simp]
+lemma produitRep_map_apply {A : Type u} [Category.{u} A] (a b : A) {c c' : Aᵒᵖ} (f : c ⟶ c')
+    (x : (c.unop ⟶ a) × (c.unop ⟶ b)) :
+    (produitRep a b).map f x = (f.unop ≫ x.1, f.unop ≫ x.2) := rfl
+
 /-- `A_{/X}` for a presheaf `X`: the category of pairs `(c, yoneda c → X)`. -/
 abbrev Tranche {A : Type u} [Category.{u} A] (X : Aᵒᵖ ⥤ Type u) : Type u :=
   CostructuredArrow yoneda X

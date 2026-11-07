@@ -64,3 +64,22 @@ theorem colimTop_ne : T.colimTop ≠ (inferInstance : TopologicalSpace P) := by
 end Tubes
 
 end Grothendieck.Folder151
+
+namespace Grothendieck.Folder151
+
+namespace DepthOne
+
+variable {X : Type*} [TopologicalSpace X] (X₀ V : Set X)
+
+/-- The four vertices of `Ĩ` for `X ⊃ X₀`: `X₀* = X₀`, `𝒱_{0,1} = 𝒱̄` (here `R_{0,1} = ∅`),
+`𝒱*_{0,1} = 𝒱̄ ∖ X₀` (here `Ẋ₁ = X₀`) and `X₁* = X ∖ X₀`. -/
+def piece : Fin 4 → Set X := ![X₀, V, V \ X₀, X₀ᶜ]
+
+/-- The colimit topology: the finest making the inclusions of the four vertices continuous. -/
+@[instance_reducible]
+def colimTop : TopologicalSpace X :=
+  ⨆ i, TopologicalSpace.coinduced (Subtype.val : piece X₀ V i → X) inferInstance
+
+end DepthOne
+
+end Grothendieck.Folder151

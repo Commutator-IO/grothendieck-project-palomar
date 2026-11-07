@@ -58,6 +58,8 @@ noncomputable def φ : A ⊗[k] A →+ A ⊗[K] A :=
     change (c • a) ⊗ₜ[K] b = a ⊗ₜ[K] (c • b)
     rw [smul_eq_algebraMap ι hι, smul_eq_algebraMap ι hι, smul_tmul]
 
+@[simp] theorem φ_tmul (a b : A) : φ ι hι (a ⊗ₜ b) = a ⊗ₜ[K] b := rfl
+
 /-- Right multiplication by `ι x` on `A`, a `K`-linear map. -/
 def mulRight (x : K) : A →ₗ[K] A where
   toFun a := a * ι x

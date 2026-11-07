@@ -32,6 +32,8 @@ structure Frame (E N : Type*) [Ring E] [StarRing E] [AddCommGroup N] (r : ℕ) w
 
 namespace Frame
 
+variable {E N : Type*} [Ring E] [StarRing E] [AddCommGroup N] {r : ℕ} (F : Frame E N r)
+
 /-- `D_ξ(α, β) = (α + β)*ξ − α*ξ − β*ξ`. -/
 def D (α β : E) : N := F.pb (α + β) F.ξ - F.pb α F.ξ - F.pb β F.ξ
 
@@ -65,5 +67,65 @@ theorem tr_mul_I {m : ℕ} (F : Frame E N (m + 1))
   sorry
 
 end Frame
+
+namespace ModelA
+
+/-- `I(x, y) = x₁ y₂` on `ℤ²`. -/
+def I : MultilinearMap ℤ (fun _ : Fin 2 => ℤ × ℤ) ℤ :=
+  (MultilinearMap.mkPiAlgebra ℤ (Fin 2) ℤ).compLinearMap
+    ![LinearMap.fst ℤ ℤ ℤ, LinearMap.snd ℤ ℤ ℤ]
+
+theorem I_apply (v : Fin 2 → ℤ × ℤ) : I v = (v 0).1 * (v 1).2 := by
+  simp [I, MultilinearMap.compLinearMap_apply, MultilinearMap.mkPiAlgebra_apply,
+    Fin.prod_univ_two]
+
+/-- `E = N = ℤ²`, trivial involution, `ξ = (1, 1)`, `ν(u) = u₁² u₂²`, `r = 2`. -/
+def F : Frame (ℤ × ℤ) (ℤ × ℤ) 2 where
+  ψ := AddMonoidHom.id _
+  ψ_injective := Function.injective_id
+  star_ψ := fun η => star_trivial η
+  pb := fun α η => α * η * α
+  ψ_pb := fun α η => by simp [star_trivial]
+  ξ := 1
+  ψ_ξ := rfl
+  I := I
+  ν := fun u => u.1 ^ 2 * u.2 ^ 2
+  I_pb := fun u v => by simp only [I_apply, Prod.fst_mul, Prod.snd_mul]; ring
+  I_ξ := by simp [I_apply]
+
+end ModelA
+
+namespace ModelB
+
+open Quaternion
+
+/-- `I(x) = x` on `ℤ`, `r = 1`. -/
+def I : MultilinearMap ℤ (fun _ : Fin 1 => ℤ) ℤ := MultilinearMap.mkPiAlgebra ℤ (Fin 1) ℤ
+
+theorem I_apply (v : Fin 1 → ℤ) : I v = v 0 := by
+  simp [I, MultilinearMap.mkPiAlgebra_apply]
+
+/-- `E = ℍ[ℤ, 0, 0, 0]` with its conjugation, `N = ℤ`, `ξ = 1`, `α*x = (re α)² x`,
+`ν(α) = (re α)²`. -/
+def F : Frame ℍ[ℤ, 0, 0, 0] ℤ 1 where
+  ψ := ⟨⟨fun x => (x : ℍ[ℤ, 0, 0, 0]), QuaternionAlgebra.coe_zero⟩,
+    fun x y => QuaternionAlgebra.coe_add x y⟩
+  ψ_injective := QuaternionAlgebra.coe_injective
+  star_ψ := fun η => QuaternionAlgebra.star_coe η
+  pb := fun u x => u.re ^ 2 * x
+  ψ_pb := fun u x => by
+    change ((u.re ^ 2 * x : ℤ) : ℍ[ℤ, 0, 0, 0]) = star u * (x : ℍ[ℤ, 0, 0, 0]) * u
+    ext <;> simp [sq] <;> ring
+  ξ := 1
+  ψ_ξ := QuaternionAlgebra.coe_one
+  I := I
+  ν := fun u => u.re ^ 2
+  I_pb := fun u v => by simp [I_apply]
+  I_ξ := by simp [I_apply]
+
+/-- The unit `i`, with `i² = 0`. -/
+def i : ℍ[ℤ, 0, 0, 0] := ⟨0, 1, 0, 0⟩
+
+end ModelB
 
 end Grothendieck.Folder50

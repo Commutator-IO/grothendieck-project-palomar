@@ -54,6 +54,9 @@ def sigmaAvant : Perm (R × Rep' n I) :=
   Function.Involutive.toPerm (fun x => (x.1, (τ n).trans x.2)) fun x => by
     ext k <;> simp [τ, swap_apply_self]
 
+@[simp] theorem sigmaAvant_apply (x : R × Rep' n I) :
+    sigmaAvant n x = (x.1, (τ n).trans x.2) := rfl
+
 theorem sigmaDernier_aux (r : R) (i : I) :
     E.φ (E.φ r i • r) i • E.φ r i • r = r := by
   rw [E.equivariant, mul_inv_cancel_right, smul_smul, E.involution, one_smul]
@@ -62,6 +65,9 @@ theorem sigmaDernier_aux (r : R) (i : I) :
 def sigmaDernier : Perm (R × Rep' n I) :=
   Function.Involutive.toPerm (fun x => (E.φ x.1 (x.2 (dernier n)) • x.1, x.2)) fun x => by
     simp only [sigmaDernier_aux]
+
+@[simp] theorem sigmaDernier_apply (x : R × Rep' n I) :
+    sigmaDernier E n x = (E.φ x.1 (x.2 (dernier n)) • x.1, x.2) := rfl
 
 variable [Fintype I] [DecidableEq I]
 

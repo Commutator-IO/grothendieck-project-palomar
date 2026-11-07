@@ -43,11 +43,31 @@ noncomputable abbrev disc (n : ℕ) : ChainComplex (ModuleCat.{u} k) ℕ :=
 /-- The value in `k` of an element of a component of a disc. -/
 def dv {n m : ℕ} (x : (disc k n).X m) : k := (show discS k n m from x).1
 
+@[simp]
+lemma disc_d_apply (n m : ℕ) (x : (disc k n).X (m + 1)) :
+    dv k (((disc k n).d (m + 1) m).hom x) = if m = n then dv k x else 0 := by
+  rw [show (disc k n).d (m + 1) m = discD k n m by simp [disc]]
+  exact discD_apply k n m x
+
+@[simp]
+lemma dv_discD (n m : ℕ) (x : (disc k n).X (m + 1)) :
+    dv k ((discD k n m).hom x) = if m = n then dv k x else 0 := discD_apply k n m x
+
+@[simp] lemma dv_smul {n m : ℕ} (c : k) (x : (disc k n).X m) : dv k (c • x) = c * dv k x := rfl
+
+@[simp] lemma dv_add {n m : ℕ} (x y : (disc k n).X m) : dv k (x + y) = dv k x + dv k y := rfl
+
+@[simp] lemma dv_zero {n m : ℕ} : dv k (0 : (disc k n).X m) = 0 := rfl
+
+@[simp] lemma dv_neg {n m : ℕ} (x : (disc k n).X m) : dv k (-x) = - dv k x := rfl
+
 variable {k}
 
 variable (k) in
 /-- The generator `1` of the disc `ℂⁿ`, in degree `n + 1`. -/
 def one (n : ℕ) : (disc k n).X (n + 1) := ⟨1, mem_discS_of_eq k n (n + 1) (Or.inr rfl) 1⟩
+
+@[simp] lemma dv_one (n : ℕ) : dv k (one k n) = 1 := rfl
 
 /-- Proposition 1 (p. 40), the endomorphisms of a disc: `End(ℂⁿ) = k · id`. -/
 lemma disc_endo {n : ℕ} (f : disc k n ⟶ disc k n) :

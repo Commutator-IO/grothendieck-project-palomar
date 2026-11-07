@@ -8,7 +8,7 @@ namespace Grothendieck.Folder72
 
 universe u
 
-open U
+variable {R : Type u} [CommRing R]
 
 variable (n : ℕ) (μ β : ℕ → R)
 
@@ -73,6 +73,8 @@ def Vh (n : ℕ) : Submodule R (Fin (n + 2) → R) := LinearMap.ker (co n 0)
 /-- Stability under all the `τᵢ`. -/
 def Invariant (n : ℕ) (μ β : ℕ → R) (W : Submodule R (Fin (n + 2) → R)) : Prop :=
   ∀ i ≤ n, ∀ w ∈ W, τ n μ β i w ∈ W
+
+variable {K : Type u} [Field K] {μ' β' : ℕ → K}
 
 /-- **Page 79.** The subspaces stable under all the `τᵢ`. -/
 theorem invariant_iff (W : Submodule K (Fin (n + 2) → K)) :

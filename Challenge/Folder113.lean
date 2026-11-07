@@ -9,8 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 namespace Grothendieck.Folder113
 
-open CategoryTheory CategoryTheory.Idempotents CategoryTheory.Idempotents.Karoubi
-  CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits Opposite
 
 universe v u v' u'
 

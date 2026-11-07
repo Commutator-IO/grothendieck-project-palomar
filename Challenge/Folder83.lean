@@ -26,6 +26,22 @@ instance : Add (P k) := ⟨fun x y => ⟨x.x0 + y.x0, x.x1 + y.x1, x.x2 + y.x2, 
 
 instance : SMul k (P k) := ⟨fun a x => ⟨a * x.x0, a * x.x1, a * x.x2, a * x.x3⟩⟩
 
+@[simp] lemma add_x0 (x y : P k) : (x + y).x0 = x.x0 + y.x0 := rfl
+
+@[simp] lemma add_x1 (x y : P k) : (x + y).x1 = x.x1 + y.x1 := rfl
+
+@[simp] lemma add_x2 (x y : P k) : (x + y).x2 = x.x2 + y.x2 := rfl
+
+@[simp] lemma add_x3 (x y : P k) : (x + y).x3 = x.x3 + y.x3 := rfl
+
+@[simp] lemma smul_x0 (a : k) (x : P k) : (a • x).x0 = a * x.x0 := rfl
+
+@[simp] lemma smul_x1 (a : k) (x : P k) : (a • x).x1 = a * x.x1 := rfl
+
+@[simp] lemma smul_x2 (a : k) (x : P k) : (a • x).x2 = a * x.x2 := rfl
+
+@[simp] lemma smul_x3 (a : k) (x : P k) : (a • x).x3 = a * x.x3 := rfl
+
 /-- The basis vectors `1`, `u`, `v`, `uv`. -/
 def one : P k := ⟨1, 0, 0, 0⟩
 

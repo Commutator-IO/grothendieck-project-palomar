@@ -107,6 +107,15 @@ def graph : SimpleGraph (Fin 3 ⊕ Pt X) where
       · exact D.sg_ne _ h.symm
       · exact D.Lk_irrefl _ h⟩
 
+@[simp] theorem adj_inl_inr (α : Fin 3) (p : Pt X) :
+    D.graph.Adj (.inl α) (.inr p) ↔ p.1 = α := Iff.rfl
+
+@[simp] theorem adj_inr_inl (α : Fin 3) (p : Pt X) :
+    D.graph.Adj (.inr p) (.inl α) ↔ p.1 = α := Iff.rfl
+
+@[simp] theorem adj_inr_inr (p q : Pt X) :
+    D.graph.Adj (.inr p) (.inr q) ↔ q = D.sg p ∨ D.Lk p q := Iff.rfl
+
 /-- Under (*) and `β_Γ̃`, the graph satisfies axiom 1 if and only if (Ka) holds;
 it then satisfies axiom 2. -/
 theorem axiom1_iff_ka (hS : D.Star) (hB : D.Beta) : Axiom1 D.graph ↔ D.Ka := by

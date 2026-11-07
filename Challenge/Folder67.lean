@@ -26,6 +26,8 @@ def TwoRegular (M : Type*) [AddCommGroup M] : Prop :=
 def twice (k : Type u) [Ring k] (M : Type*) [AddCommGroup M] [Module k M] : M →ₗ[k] M :=
   (2 : ℕ) • LinearMap.id
 
+@[simp] lemma twice_apply (x : M) : twice k M x = 2 • x := rfl
+
 /-- The submodule `2M`. -/
 abbrev two (k : Type u) [Ring k] (M : Type*) [AddCommGroup M] [Module k M] : Submodule k M :=
   LinearMap.range (twice k M)
@@ -77,6 +79,39 @@ lemma sub_σ_mem_minus (x : X.carrier) : x - X.σ x ∈ X.minus := by
   rw [mem_minus, map_sub, X.σ_σ, neg_sub]
 
 end InvMod
+
+/-- A triple `(P, Q, m)`: two `2`-regular modules and a submodule
+`m ⊂ P/2P × Q/2Q` meeting each factor trivially. -/
+structure Triple where
+  /-- the module `P` -/
+  P : Type v
+  /-- the module `Q` -/
+  Q : Type v
+  [gP : AddCommGroup P]
+  [mP : Module k P]
+  [gQ : AddCommGroup Q]
+  [mQ : Module k Q]
+  regP : TwoRegular P
+  regQ : TwoRegular Q
+  /-- the submodule `m` -/
+  m : Submodule k ((P ⧸ two k P) × (Q ⧸ two k Q))
+  m_P : ∀ p : P ⧸ two k P, (p, 0) ∈ m → p = 0
+  m_Q : ∀ q : Q ⧸ two k Q, (0, q) ∈ m → q = 0
+
+attribute [instance] Triple.gP Triple.mP Triple.gQ Triple.mQ
+
+namespace Triple
+
+variable {k}
+
+/-- The preimage `N ⊂ P × Q` of `m`. -/
+def N (X : Triple.{v} k) : Submodule k (X.P × X.Q) :=
+  X.m.comap ((two k X.P).mkQ.prodMap (two k X.Q).mkQ)
+
+@[simp] lemma σN_apply (X : Triple.{v} k) (z : X.N) :
+    ((X.σN z : X.N) : X.P × X.Q) = ((z : X.P × X.Q).1, -(z : X.P × X.Q).2) := rfl
+
+end Triple
 
 namespace InvMod
 

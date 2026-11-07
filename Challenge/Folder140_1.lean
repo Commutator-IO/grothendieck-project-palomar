@@ -97,6 +97,9 @@ instance : DistribMulAction G3 VJ where
   smul_zero σ := rfl
   smul_add σ x y := rfl
 
+@[simp] lemma smul_VJ (σ : G3) (x : VJ) (j : Fin 3) :
+    ((σ • x : VJ) : Fin 3 → ℤ) j = (x : Fin 3 → ℤ) (σ⁻¹ j) := rfl
+
 /-- The units of a ring `k` (the units of the base `S`), written additively, with the trivial
 action of `𝔖₃`. -/
 def Triv (k : Type) [CommRing k] := Additive kˣ
@@ -105,6 +108,8 @@ instance (k : Type) [CommRing k] : AddCommGroup (Triv k) :=
   inferInstanceAs (AddCommGroup (Additive kˣ))
 
 variable {k : Type} [CommRing k]
+
+@[simp] lemma smul_triv (g : G3) (x : Triv k) : g • x = x := rfl
 
 /-- The coefficients of `sgnExp σ`: `1` at `0` when `σ⁻¹(∞) = 1`, at `1` when `σ⁻¹(∞) = 0`. -/
 def wt (σ : G3) (j : Fin 3) : ℤ := if σ⁻¹ 2 = 1 ∧ j = 0 ∨ σ⁻¹ 2 = 0 ∧ j = 1 then 1 else 0
@@ -159,6 +164,26 @@ def dv (x : Units3 k) : VJ := Prod.snd (α := Triv k) x
 @[ext] lemma ext {x y : Units3 k} (h1 : x.cst = y.cst) (h2 : x.dv = y.dv) : x = y :=
   Prod.ext h1 h2
 
+@[simp] lemma cst_mk (c : Triv k) (v : VJ) : (mk c v).cst = c := rfl
+
+@[simp] lemma dv_mk (c : Triv k) (v : VJ) : (mk c v).dv = v := rfl
+
+@[simp] lemma cst_add (x y : Units3 k) : (x + y).cst = x.cst + y.cst := rfl
+
+@[simp] lemma dv_add (x y : Units3 k) : (x + y).dv = x.dv + y.dv := rfl
+
+@[simp] lemma cst_sub (x y : Units3 k) : (x - y).cst = x.cst - y.cst := rfl
+
+@[simp] lemma dv_sub (x y : Units3 k) : (x - y).dv = x.dv - y.dv := rfl
+
+@[simp] lemma cst_zero : (0 : Units3 k).cst = 0 := rfl
+
+@[simp] lemma dv_zero : (0 : Units3 k).dv = 0 := rfl
+
+@[simp] lemma cst_zsmul (m : ℤ) (x : Units3 k) : (m • x).cst = m • x.cst := rfl
+
+@[simp] lemma dv_zsmul (m : ℤ) (x : Units3 k) : (m • x).dv = m • x.dv := rfl
+
 end Units3
 
 open Units3
@@ -193,6 +218,11 @@ instance : DistribMulAction G3 (Units3 k) where
   smul_add σ x y := Units3.ext (by
     change x.cst + y.cst + negPow (sgnExp σ (x.dv + y.dv)) = x.cst + _ + (y.cst + _)
     rw [sgnExp_add, negPow_add]; abel) (smul_add σ x.dv y.dv)
+
+@[simp] lemma cst_smul (σ : G3) (x : Units3 k) :
+    (σ • x).cst = x.cst + negPow (sgnExp σ x.dv) := rfl
+
+@[simp] lemma dv_smul (σ : G3) (x : Units3 k) : (σ • x).dv = σ • x.dv := rfl
 
 /-- The sign of a permutation, in `k^*`. -/
 def sgnK (σ : G3) : Triv k :=

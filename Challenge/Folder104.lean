@@ -28,6 +28,16 @@ namespace Grothendieck.Folder104
 
 open CategoryTheory
 
+/-- **Example 3**, the hemispherical disc `D_n`: `I_n = (Δ_{n-1} × {±1}) ⊔ {d_n}`
+(`none` is `d_n`). -/
+def Hemi (n : ℕ) : Type := Option (Fin n × Bool)
+
+/-- The order of the cells: `(k, ε) < (k', ε')` iff `k < k'`, `d_n` on top. -/
+def Hemi.le {n : ℕ} : Hemi n → Hemi n → Prop
+  | _, none => True
+  | none, some _ => False
+  | some a, some b => a = b ∨ a.1 < b.1
+
 section Epinglage
 
 open Opposite Limits
@@ -88,6 +98,11 @@ instance : Category (Epingle M) where
 @[ext]
 lemma Epingle.hom_ext {K L : Epingle M} {φ ψ : K ⟶ L} (h : φ.f = ψ.f) : φ = ψ :=
   Epingle.Hom.ext h
+
+@[simp] lemma Epingle.id_f (K : Epingle M) : Epingle.Hom.f (𝟙 K) = id := rfl
+
+@[simp] lemma Epingle.comp_f {K L N : Epingle M} (φ : K ⟶ L) (ψ : L ⟶ N) :
+    (φ ≫ ψ).f = ψ.f ∘ φ.f := rfl
 
 end Epinglage
 
@@ -269,5 +284,62 @@ theorem versEpingle_isEquivalence : (versEpingle hmono hend hsk).IsEquivalence :
   sorry
 
 end Prefaisceaux
+
+end Grothendieck.Folder104
+
+namespace Grothendieck.Folder104
+
+open CategoryTheory Opposite
+
+universe w
+
+section Fermees
+
+variable {M : Type w} [SmallCategory M]
+
+variable (hmono : ∀ {X Y : M} (f : X ⟶ Y), Mono f)
+  (hend : ∀ {X : M} (f : X ⟶ X), f = 𝟙 X) (hsk : Skeletal M)
+
+include hmono hend hsk in
+/-- **Page 14.** The monomorphisms of `M`-pinned posets are the morphisms `f` that are
+injective. (Through the equivalence of page 13 they are also the monomorphisms of `M̂`,
+`mono_iff_injective_versEpingle`.) -/
+theorem Epingle.mono_iff_injective {K L : Epingle M} (φ : K ⟶ L) :
+    Mono φ ↔ Function.Injective φ.f := by
+  constructor
+  · intro hφ ξ η hξη
+    have h2 : K.τ η = K.τ ξ := by rw [← φ.τ_f η, ← hξη, φ.τ_f]
+    have e : K.pointe hmono hend hsk ξ rfl ≫ φ = K.pointe hmono hend hsk η h2 ≫ φ := by
+      ext p
+      change φ.f (K.u ξ _) = φ.f (K.u η _)
+      rw [φ.u_f, φ.u_f, L.u_congr hξη]
+      congr 1
+      simp
+    have := congrArg (fun ψ => ψ.f ⟨K.τ ξ, 𝟙 _⟩) ((cancel_mono φ).1 e)
+    change K.u ξ _ = K.u η _ at this
+    rwa [Category.id_comp, Category.id_comp, K.u_top', K.u_top'] at this
+  · intro hφ
+    exact ⟨fun g h e => Epingle.hom_ext (funext fun x => hφ (congrFun (congrArg Epingle.Hom.f e) x))⟩
+
+end Fermees
+
+section Recollement
+
+variable {M : Type w} [SmallCategory M]
+
+namespace Recollement
+
+variable {K : Type w} [PartialOrder K] {τ : K → M} {A : Set K} (hA : ∀ ξ, ∃ α ∈ A, ξ ≤ α)
+
+/-- The glued pinning: `u_ξ = v_α ∘ (· ≫ y)` for `ξ = v_α(y)`. -/
+noncomputable def u (ξ : K) (z : Sous (τ ξ)) : K :=
+  R.v (R.rep hA ξ).1 ⟨z.1, z.2 ≫ eqToHom (R.τ_rep hA ξ) ≫ (R.rep hA ξ).2.2⟩
+
+variable (hτ : ∀ ξ η : K, ξ < η → Nonempty (τ ξ ⟶ τ η) ∧ τ ξ ≠ τ η)
+  (hmono : ∀ {X Y : M} (f : X ⟶ Y), Mono f)
+
+end Recollement
+
+end Recollement
 
 end Grothendieck.Folder104

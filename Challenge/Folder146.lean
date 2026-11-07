@@ -38,6 +38,9 @@ theorem six_dvd (h2 : (2 : K) ≠ 0) (h3 : (3 : K) ≠ 0) {ζ : K} (hζ : ζ ^ 2
     (hc : ∀ a x, U x → der a x ^ m = h (anh a x) / h x) : 6 ∣ m := by
   sorry
 
+/-- `h = λ²(1 − λ)²`. -/
+def h3 (x : K) : K := x ^ 2 * (1 - x) ^ 2
+
 variable {α : Type*} {n : ℕ} {V : α → Prop} {act : Fin n → α → α} {c : Fin n → α → K}
 
 end Grothendieck.Folder146

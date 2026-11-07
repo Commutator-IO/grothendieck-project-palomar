@@ -62,6 +62,10 @@ def normMap : (indRep χ M).IntertwiningMap M.ρ :=
       rw [indRep_apply]
       split_ifs <;> simp [add_comm]
 
+lemma torusIncl_apply (v : M.V) : torusIncl χ M v = (v, -v) := rfl
+
+lemma normMap_apply (v : M.V × M.V) : normMap χ M v = v.1 + v.2 := rfl
+
 /-- `0 → G → Z^* → 𝔾_m → 0` of page 65, at the level of `Γ`-modules. -/
 def torusSeq : ShortComplex (Rep.{0} k Γ) where
   X₁ := Rep.of (twistRep χ M)

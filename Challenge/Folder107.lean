@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.IsTerminal
 
 namespace Grothendieck.Folder107
 
-open CategoryTheory Limits HomotopicalAlgebra
+open CategoryTheory Limits
 
 universe v u
 
