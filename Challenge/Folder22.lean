@@ -35,6 +35,9 @@ section Discrete
 /-- `k = ℚ(x_i : i ∈ I)`. -/
 abbrev K (I : Type*) := FractionRing (MvPolynomial I ℚ)
 
+instance (I : Type*) : Algebra.FormallyEtale (MvPolynomial I ℚ) (K I) :=
+  Algebra.FormallyEtale.of_isLocalization (nonZeroDivisors (MvPolynomial I ℚ))
+
 end Discrete
 
 end PowerSeriesObstruction

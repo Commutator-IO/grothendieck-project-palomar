@@ -48,24 +48,6 @@ open CategoryTheory CochainComplex HomComplex
 
 end Grothendieck.Folder93
 
-namespace Grothendieck.Folder93.PCurvature
-
-open Finset Polynomial
-
-section Ring
-
-variable {A : Type*} [CommRing A] (D : Derivation ℤ A A)
-
-local notation "μ" => LinearMap.mulLeft ℤ
-
-local notation "δ" => (D : Module.End ℤ A)
-
-variable (p : ℕ) [hp : Fact p.Prime] [CharP A p]
-
-end Ring
-
-end Grothendieck.Folder93.PCurvature
-
 namespace Grothendieck.Folder93.Alpha
 
 open Polynomial
@@ -94,15 +76,5 @@ theorem rigidity_alpha_local [IsLocalRing A] [Fact p.Prime] [CharP A p] (hq : 3 
       AdjoinRoot.mk (P p n α) (s * (C c * X + C d)) = AdjoinRoot.mk (P p n α) (C a * X + C b) ∧
       IsUnit (AdjoinRoot.mk (P p n α) (C c * X + C d)) := by
   sorry
-
-end Grothendieck.Folder93.Alpha
-
-namespace Grothendieck.Folder93.Alpha
-
-open Polynomial
-
-local notation "D" => Polynomial.hasseDeriv
-
-variable {A : Type*} [CommRing A] (p n : ℕ) (α : A)
 
 end Grothendieck.Folder93.Alpha

@@ -6,7 +6,7 @@ public import Mathlib
 
 namespace Grothendieck.Folder42.Reseau
 
-open AlgebraicGeometry CategoryTheory Limits Topology
+open AlgebraicGeometry CategoryTheory Limits Topology TopologicalSpace
 
 universe u
 

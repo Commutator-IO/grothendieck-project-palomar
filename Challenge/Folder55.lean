@@ -4,7 +4,7 @@ public import Mathlib
 
 @[expose] public section
 
-open CategoryTheory Opposite
+open CategoryTheory TopologicalSpace Opposite
 
 namespace Grothendieck.Folder55
 

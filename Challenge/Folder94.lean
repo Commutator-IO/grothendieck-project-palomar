@@ -24,6 +24,13 @@ variable {R : Type*} [CommRing R] (c : ℕ → R) (M : Type*) [AddCommGroup M] [
 multiplication by `∏_{i < l ≤ j} c l`. -/
 def teleMap (i j : ℕ) (_ : i ≤ j) : M →ₗ[R] M := (∏ l ∈ Finset.Ioc i j, c l) • LinearMap.id
 
+instance teleMap_directedSystem :
+    DirectedSystem (fun _ : ℕ => M) (fun i j h => teleMap c M i j h) where
+  map_self i x := by simp [teleMap]
+  map_map k j i hij hjk x := by
+    simp only [teleMap, LinearMap.smul_apply, LinearMap.id_apply, smul_smul]
+    rw [mul_comm, Finset.prod_Ioc_consecutive _ hij hjk]
+
 /-- The functor `F(M) = colim(M →c M →c M → ⋯)` of the counterexample. -/
 abbrev Tele : Type _ := Module.DirectLimit (fun _ : ℕ => M) (teleMap c M)
 

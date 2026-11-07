@@ -171,6 +171,14 @@ instance : Algebra k (MAlg b c b' c' t) :=
     (fun a x y => toP_injective (by rw [toP_mul, toP_smul, smul_mulM, toP_smul, toP_mul]))
     (fun a x y => toP_injective (by rw [toP_mul, toP_smul, mulM_smul, toP_smul, toP_mul]))
 
+instance : Module.Free k (MAlg b c b' c' t) := inferInstanceAs (Module.Free k (Fin 4 → k))
+
+instance : Module.Finite k (MAlg b c b' c' t) := inferInstanceAs (Module.Finite k (Fin 4 → k))
+
+instance : FaithfulSMul k (MAlg b c b' c' t) :=
+  ⟨fun {r s} h => by
+    simpa [toP_smul, toP_one, P.one] using congrArg (fun x => (toP x).x0) (h 1)⟩
+
 /-- **Theorem of page 98.** `M(b, c; b', c'; t)` is an Azumaya algebra over `k`
 (`IsAzumaya`: finite, projective, faithful, with `M ⊗ Mᵐᵒᵖ → End M` bijective) if and
 only if `Q(t) = t² − bb't + b²c' + b'²c − 4cc'` is invertible in `k`. Over any

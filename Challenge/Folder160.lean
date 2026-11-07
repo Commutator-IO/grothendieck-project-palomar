@@ -50,6 +50,4 @@ theorem A_zero_eval {n : ℕ} (ξ : Fin n → S) :
 
 variable {K : Type*} [Field K] [Algebra (ZMod p) K]
 
-local notation "ι" n:max => algebraMap (MvPolynomial (Fin n) (ZMod p)) (𝕂 n)
-
 end Grothendieck.Folder160

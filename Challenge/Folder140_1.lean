@@ -107,6 +107,13 @@ def Triv (k : Type) [CommRing k] := Additive kˣ
 instance (k : Type) [CommRing k] : AddCommGroup (Triv k) :=
   inferInstanceAs (AddCommGroup (Additive kˣ))
 
+instance (k : Type) [CommRing k] : DistribMulAction G3 (Triv k) where
+  smul _ x := x
+  one_smul _ := rfl
+  mul_smul _ _ _ := rfl
+  smul_zero _ := rfl
+  smul_add _ _ _ := rfl
+
 variable {k : Type} [CommRing k]
 
 @[simp] lemma smul_triv (g : G3) (x : Triv k) : g • x = x := rfl

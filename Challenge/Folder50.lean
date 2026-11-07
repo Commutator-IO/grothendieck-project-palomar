@@ -70,15 +70,6 @@ end Frame
 
 namespace ModelA
 
-/-- `I(x, y) = x₁ y₂` on `ℤ²`. -/
-def I : MultilinearMap ℤ (fun _ : Fin 2 => ℤ × ℤ) ℤ :=
-  (MultilinearMap.mkPiAlgebra ℤ (Fin 2) ℤ).compLinearMap
-    ![LinearMap.fst ℤ ℤ ℤ, LinearMap.snd ℤ ℤ ℤ]
-
-theorem I_apply (v : Fin 2 → ℤ × ℤ) : I v = (v 0).1 * (v 1).2 := by
-  simp [I, MultilinearMap.compLinearMap_apply, MultilinearMap.mkPiAlgebra_apply,
-    Fin.prod_univ_two]
-
 /-- `E = N = ℤ²`, trivial involution, `ξ = (1, 1)`, `ν(u) = u₁² u₂²`, `r = 2`. -/
 def F : Frame (ℤ × ℤ) (ℤ × ℤ) 2 where
   ψ := AddMonoidHom.id _
@@ -99,12 +90,6 @@ namespace ModelB
 
 open Quaternion
 
-/-- `I(x) = x` on `ℤ`, `r = 1`. -/
-def I : MultilinearMap ℤ (fun _ : Fin 1 => ℤ) ℤ := MultilinearMap.mkPiAlgebra ℤ (Fin 1) ℤ
-
-theorem I_apply (v : Fin 1 → ℤ) : I v = v 0 := by
-  simp [I, MultilinearMap.mkPiAlgebra_apply]
-
 /-- `E = ℍ[ℤ, 0, 0, 0]` with its conjugation, `N = ℤ`, `ξ = 1`, `α*x = (re α)² x`,
 `ν(α) = (re α)²`. -/
 def F : Frame ℍ[ℤ, 0, 0, 0] ℤ 1 where
@@ -122,9 +107,6 @@ def F : Frame ℍ[ℤ, 0, 0, 0] ℤ 1 where
   ν := fun u => u.re ^ 2
   I_pb := fun u v => by simp [I_apply]
   I_ξ := by simp [I_apply]
-
-/-- The unit `i`, with `i² = 0`. -/
-def i : ℍ[ℤ, 0, 0, 0] := ⟨0, 1, 0, 0⟩
 
 end ModelB
 

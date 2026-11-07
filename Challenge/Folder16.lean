@@ -80,17 +80,3 @@ theorem critere_lefschetz (ℰ : Subring E) (G : Graduation π n) {L : E} (hLE :
 end DecompositionPrimitive
 
 end Grothendieck.Folder16
-
-namespace Grothendieck.Folder16
-
-section ContreExemple
-
-/-- Entrywise check of a `2 × 2` matrix identity. -/
-local macro "mat" : tactic =>
-  `(tactic| (ext i j; fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]))
-
-variable (R : Type*) [CommRing R]
-
-end ContreExemple
-
-end Grothendieck.Folder16
