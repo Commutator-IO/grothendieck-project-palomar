@@ -437,6 +437,14 @@ noncomputable def basisDx (I : Type*) : Module.Basis I (K I) Ω[K I⁄ℚ] :=
   ((KaehlerDifferential.mvPolynomialBasis ℚ I).baseChange (K I)).map
     (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale ℚ (MvPolynomial I ℚ) (K I))
 
+-- TEMP diagnostics (CI only)
+example (I : Type) : Algebra ℚ (K I) := inferInstance
+example (I : Type) : Module ℚ (K I)⟦X⟧ := inferInstance
+example (I : Type) : SMulCommClass (K I) ℚ (K I)⟦X⟧ := inferInstance
+example (I : Type) : Module ℚ Ω[K I⁄ℚ] := inferInstance
+set_option trace.Meta.synthInstance true in
+example (I : Type) : Module ℚ ((K I)⟦X⟧ ⊗[K I] Ω[K I⁄ℚ]) := inferInstance
+
 theorem basisDx_apply (I : Type*) (i : I) :
     basisDx I i = KaehlerDifferential.D ℚ (K I) (x i) := by
   simp only [basisDx, Module.Basis.map_apply, Module.Basis.baseChange_apply,
@@ -912,8 +920,9 @@ theorem partialD_one_kPrimeOf (c : FracF p (Fin 2)) (hc : c ∈ kPrimeOf p K) :
     algebraMap _ K (partialD p 1 c) = 0 := by
   obtain ⟨w, hw⟩ := hc
   have h : dx.compAlgebraMap (FracF p (Fin 2)) = dx (algebraMap _ K (var p (1 : Fin 2))) •
-      (Algebra.linearMap _ K).compDer (partialD p 1) +
-        dx (algebraMap _ K (var p (0 : Fin 2))) • (Algebra.linearMap _ K).compDer (partialD p 0) :=
+      (Algebra.linearMap _ K).compDer (partialD p (1 : Fin 2)) +
+        dx (algebraMap _ K (var p (0 : Fin 2))) •
+          (Algebra.linearMap _ K).compDer (partialD p (0 : Fin 2)) :=
     derivation_ext p fun i => by fin_cases i <;> simp [partialD_var]
   have h := congrArg (· c) h
   simp [← hw, _root_.frobenius_def, der_pow_char' p, hy, hdx] at h

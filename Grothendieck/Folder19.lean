@@ -641,6 +641,10 @@ def preAdj {C D : Type} [Category C] [Category D] {u : C ⥤ D} {v : D ⥤ C} (a
 
 variable {C D : Type} [Preorder C] [Preorder D]
 
+/-- `ℤ ⊕ ℤ` is taken as a poset here, not as the disjoint-union category
+`CategoryTheory.sum` that the full Mathlib import also provides. -/
+local instance : SmallCategory (ℤ ⊕ ℤ) := Preorder.smallCategory _
+
 open Classical in
 /-- The presheaf `x ↦ {b : Bool // x ≤ p → b = false}`. -/
 noncomputable def sep (p : D) : Dᵒᵖ ⥤ Type where

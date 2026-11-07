@@ -672,7 +672,8 @@ instance : Module.Free ℤ (Omega ℤ ℚ) := Module.Free.of_basis polyaBasis
 /-- **Vandermonde**, as an identity in `ℚ[X, Y]`:
 `binom(X + Y, m) = ∑_{i + j = m} binom(X, i) binom(Y, j)`. -/
 theorem vandermonde (m : ℕ) :
-    coadd (binom m) = ∑ ij ∈ Finset.antidiagonal m, (binom ij.1).map C * C (binom ij.2) := by
+    coadd (binom m) =
+      ∑ ij ∈ Finset.HasAntidiagonal.antidiagonal m, (binom ij.1).map C * C (binom ij.2) := by
   have h1 : coadd (binom m) = Ring.choose (X + C X : ℚ[X][X]) m := by
     simpa [coadd, binom] using
       Ring.map_choose (eval₂RingHom ((C : ℚ[X] →+* ℚ[X][X]).comp C) (X + C X)) (X : ℚ[X]) m
@@ -688,9 +689,9 @@ theorem vandermonde (m : ℕ) :
 element of `Int(ℤ) ⊗ Int(ℤ)` representing `Fₘ(X + Y)`. -/
 theorem coaddition_binom (m : ℕ) (t : Omega ℤ ℚ ⊗[ℤ] Omega ℤ ℚ) :
     Phi ℤ ℚ t = coadd (binom m) ↔
-      t = ∑ ij ∈ Finset.antidiagonal m, polyaBasis ij.1 ⊗ₜ polyaBasis ij.2 := by
-  have h : Phi ℤ ℚ (∑ ij ∈ Finset.antidiagonal m, polyaBasis ij.1 ⊗ₜ polyaBasis ij.2) =
-      coadd (binom m) := by
+      t = ∑ ij ∈ Finset.HasAntidiagonal.antidiagonal m, polyaBasis ij.1 ⊗ₜ polyaBasis ij.2 := by
+  have h : Phi ℤ ℚ (∑ ij ∈ Finset.HasAntidiagonal.antidiagonal m,
+      polyaBasis ij.1 ⊗ₜ polyaBasis ij.2) = coadd (binom m) := by
     rw [vandermonde, map_sum]
     simp only [Phi_tmul, polyaBasis_apply]
   exact ⟨fun ht => Phi_injective (nonZeroDivisors ℤ) (ht.trans h.symm), fun ht => ht ▸ h⟩
