@@ -37,16 +37,6 @@ lemma mem_two {x : M} : x ∈ two k M ↔ ∃ y, 2 • y = x := by
 
 lemma two_smul_mem_two (y : M) : 2 • y ∈ two k M := mem_two.2 ⟨y, rfl⟩
 
-/-- In `M/2M`, `-x` and `x` have the same class. -/
-lemma mk_neg (x : M) :
-    (Submodule.Quotient.mk (-x) : M ⧸ two k M) = Submodule.Quotient.mk x := by
-  rw [Submodule.Quotient.eq, mem_two]
-  exact ⟨-x, by rw [two_nsmul]; abel⟩
-
-lemma neg_mk (x : M) :
-    -(Submodule.Quotient.mk x : M ⧸ two k M) = Submodule.Quotient.mk x := by
-  rw [← Submodule.Quotient.mk_neg, mk_neg]
-
 end Basics
 
 /-- A `2`-regular `k`-module with an involution. -/
@@ -66,22 +56,10 @@ namespace InvMod
 
 variable {k}
 
-/-- Morphisms: `k`-linear maps commuting with the involutions. -/
-@[ext]
-structure Hom (X Y : InvMod.{v} k) where
-  /-- the underlying linear map -/
-  f : X.carrier →ₗ[k] Y.carrier
-  comm : ∀ x, f (X.σ x) = Y.σ (f x)
-
 instance : Category (InvMod.{v} k) where
   Hom := Hom
   id X := ⟨LinearMap.id, fun _ => rfl⟩
   comp φ ψ := ⟨ψ.f ∘ₗ φ.f, fun x => by simp [φ.comm, ψ.comm]⟩
-
-@[simp] lemma id_f (X : InvMod.{v} k) : Hom.f (𝟙 X) = LinearMap.id := rfl
-
-@[simp] lemma comp_f {X Y Z : InvMod.{v} k} (φ : X ⟶ Y) (ψ : Y ⟶ Z) :
-    Hom.f (φ ≫ ψ) = Hom.f ψ ∘ₗ Hom.f φ := rfl
 
 /-- The `+1`-eigenmodule `M₊ = Ker(1 - σ)`. -/
 def plus (X : InvMod.{v} k) : Submodule k X.carrier := LinearMap.ker (LinearMap.id - X.σ)
@@ -106,64 +84,6 @@ lemma sub_σ_mem_minus (x : X.carrier) : x - X.σ x ∈ X.minus := by
   rw [mem_minus, map_sub, X.σ_σ, neg_sub]
 
 end InvMod
-
-/-- A triple `(P, Q, m)`: two `2`-regular modules and a submodule
-`m ⊂ P/2P × Q/2Q` meeting each factor trivially. -/
-structure Triple where
-  /-- the module `P` -/
-  P : Type v
-  /-- the module `Q` -/
-  Q : Type v
-  [gP : AddCommGroup P]
-  [mP : Module k P]
-  [gQ : AddCommGroup Q]
-  [mQ : Module k Q]
-  regP : TwoRegular P
-  regQ : TwoRegular Q
-  /-- the submodule `m` -/
-  m : Submodule k ((P ⧸ two k P) × (Q ⧸ two k Q))
-  m_P : ∀ p : P ⧸ two k P, (p, 0) ∈ m → p = 0
-  m_Q : ∀ q : Q ⧸ two k Q, (0, q) ∈ m → q = 0
-
-attribute [instance] Triple.gP Triple.mP Triple.gQ Triple.mQ
-
-namespace Triple
-
-variable {k}
-
-/-- Morphisms of triples: pairs `(f, g)` with `(f̄ × ḡ)(m) ⊂ m'`. -/
-@[ext]
-structure Hom (X Y : Triple.{v} k) where
-  /-- the map on `P` -/
-  f : X.P →ₗ[k] Y.P
-  /-- the map on `Q` -/
-  g : X.Q →ₗ[k] Y.Q
-  hm : ∀ p q, (Submodule.Quotient.mk p, Submodule.Quotient.mk q) ∈ X.m →
-    (Submodule.Quotient.mk (f p), Submodule.Quotient.mk (g q)) ∈ Y.m
-
-instance : Category (Triple.{v} k) where
-  Hom := Hom
-  id X := ⟨LinearMap.id, LinearMap.id, fun _ _ h => h⟩
-  comp φ ψ := ⟨ψ.f ∘ₗ φ.f, ψ.g ∘ₗ φ.g, fun p q h => ψ.hm _ _ (φ.hm p q h)⟩
-
-/-- The preimage `N ⊂ P × Q` of `m`. -/
-def N (X : Triple.{v} k) : Submodule k (X.P × X.Q) :=
-  X.m.comap ((two k X.P).mkQ.prodMap (two k X.Q).mkQ)
-
-lemma mem_N {X : Triple.{v} k} {z : X.P × X.Q} :
-    z ∈ X.N ↔ (Submodule.Quotient.mk z.1, Submodule.Quotient.mk z.2) ∈ X.m := Iff.rfl
-
-/-- The involution `id × (-id)` of `N`. -/
-def σN (X : Triple.{v} k) : X.N →ₗ[k] X.N :=
-  (LinearMap.prodMap LinearMap.id (-LinearMap.id)).restrict (p := X.N) (q := X.N)
-    (fun z hz => by
-      rw [mem_N] at hz ⊢
-      simpa [neg_mk] using hz)
-
-@[simp] lemma σN_apply (X : Triple.{v} k) (z : X.N) :
-    ((X.σN z : X.N) : X.P × X.Q) = ((z : X.P × X.Q).1, -(z : X.P × X.Q).2) := rfl
-
-end Triple
 
 namespace InvMod
 

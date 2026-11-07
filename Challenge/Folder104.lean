@@ -28,42 +28,6 @@ namespace Grothendieck.Folder104
 
 open CategoryTheory
 
-/-- **Example 3**, the hemispherical disc `D_n`: `I_n = (Δ_{n-1} × {±1}) ⊔ {d_n}`
-(`none` is `d_n`). -/
-def Hemi (n : ℕ) : Type := Option (Fin n × Bool)
-
-instance (n : ℕ) : Fintype (Hemi n) := inferInstanceAs (Fintype (Option (Fin n × Bool)))
-
-instance (n : ℕ) : DecidableEq (Hemi n) := inferInstanceAs (DecidableEq (Option (Fin n × Bool)))
-
-/-- The order of the cells: `(k, ε) < (k', ε')` iff `k < k'`, `d_n` on top. -/
-def Hemi.le {n : ℕ} : Hemi n → Hemi n → Prop
-  | _, none => True
-  | none, some _ => False
-  | some a, some b => a = b ∨ a.1 < b.1
-
-instance (n : ℕ) : PartialOrder (Hemi n) where
-  le := Hemi.le
-  le_refl a := by cases a <;> simp [Hemi.le]
-  le_trans a b c := by
-    cases a <;> cases b <;> cases c <;> simp only [Hemi.le, imp_self, implies_true,
-      IsEmpty.forall_iff]
-    rename_i a b c
-    rintro (rfl | h₁) (rfl | h₂)
-    · exact Or.inl rfl
-    · exact Or.inr h₂
-    · exact Or.inr h₁
-    · exact Or.inr (h₁.trans h₂)
-  le_antisymm a b := by
-    cases a <;> cases b <;> simp only [Hemi.le, IsEmpty.forall_iff, forall_const]
-    · rfl
-    rename_i a b
-    rintro (rfl | h₁) (h₂ | h₂)
-    · rfl
-    · rfl
-    · exact h₂.symm ▸ rfl
-    · exact absurd (h₁.trans h₂) (lt_irrefl _)
-
 section Epinglage
 
 open Opposite Limits
@@ -124,11 +88,6 @@ instance : Category (Epingle M) where
 @[ext]
 lemma Epingle.hom_ext {K L : Epingle M} {φ ψ : K ⟶ L} (h : φ.f = ψ.f) : φ = ψ :=
   Epingle.Hom.ext h
-
-@[simp] lemma Epingle.id_f (K : Epingle M) : Epingle.Hom.f (𝟙 K) = id := rfl
-
-@[simp] lemma Epingle.comp_f {K L N : Epingle M} (φ : K ⟶ L) (ψ : L ⟶ N) :
-    (φ ≫ ψ).f = ψ.f ∘ φ.f := rfl
 
 end Epinglage
 
@@ -235,9 +194,6 @@ def ordreElem (X : Mᵒᵖ ⥤ Type w) : PartialOrder (Elem X) where
     simp only [op_id, Functor.map_id_apply] at ha
     rw [ha]
 
-lemma le_elem_iff (X : Mᵒᵖ ⥤ Type w) (p q : Elem X) :
-    (ordreElem hend hsk X).le p q ↔ ∃ a : p.1 ⟶ q.1, X.map a.op q.2 = p.2 := Iff.rfl
-
 /-- **The `M`-pinned poset `X̃` of a non-singular presheaf** (page 12): its elements with the
 type map `(D, x) ↦ D` and the pinning `u_{(D,x)}(D', a) = (D', X(a)(x))`. -/
 def versEpingleObj (X : Mᵒᵖ ⥤ Type w) (hX : NonSingulier X) : Epingle M :=
@@ -305,142 +261,6 @@ def versEpingle : Adm M ⥤ Epingle M where
   map α := versEpingleMap hend hsk _ _ α.hom
   map_id _ := by ext; rfl
   map_comp _ _ := by ext; rfl
-
-lemma elem_eq_transport {X : Mᵒᵖ ⥤ Type w} {D : M} (q : Elem X) (h : q.1 = D) :
-    q = ⟨D, X.map (eqToHom h.symm).op q.2⟩ := by
-  obtain ⟨E, y⟩ := q
-  subst h
-  simp
-
-/-- The component at `D` of the natural transformation a morphism of pinned posets comes from. -/
-def appOfHom {X Y : Mᵒᵖ ⥤ Type w} {hX : NonSingulier X} {hY : NonSingulier Y}
-    (φ : versEpingleObj hend hsk X hX ⟶ versEpingleObj hend hsk Y hY) (D : M)
-    (x : X.obj (op D)) : Y.obj (op D) :=
-  Y.map (eqToHom (φ.τ_f ⟨D, x⟩).symm).op (φ.f ⟨D, x⟩).2
-
-lemma f_eq_appOfHom {X Y : Mᵒᵖ ⥤ Type w} {hX : NonSingulier X} {hY : NonSingulier Y}
-    (φ : versEpingleObj hend hsk X hX ⟶ versEpingleObj hend hsk Y hY) (p : Elem X) :
-    φ.f p = ⟨p.1, appOfHom hend hsk φ p.1 p.2⟩ :=
-  elem_eq_transport _ (φ.τ_f p)
-
-lemma appOfHom_naturality {X Y : Mᵒᵖ ⥤ Type w} {hX : NonSingulier X} {hY : NonSingulier Y}
-    (φ : versEpingleObj hend hsk X hX ⟶ versEpingleObj hend hsk Y hY) {D D' : M}
-    (a : D' ⟶ D) (x : X.obj (op D)) :
-    appOfHom hend hsk φ D' (X.map a.op x) = Y.map a.op (appOfHom hend hsk φ D x) := by
-  have h := φ.u_f ⟨D, x⟩ ⟨D', a⟩
-  change φ.f ⟨D', X.map a.op x⟩ = ⟨D', Y.map (a ≫ eqToHom _).op (φ.f ⟨D, x⟩).2⟩ at h
-  rw [f_eq_appOfHom] at h
-  obtain ⟨-, h⟩ := Sigma.mk.inj_iff.1 h
-  rw [eq_of_heq h, appOfHom, op_comp, Functor.map_comp_apply]
-  rfl
-
-include hmono in
-instance : (versEpingle hmono hend hsk).Faithful where
-  map_injective {X Y α β} h := by
-    ext U x
-    have := congrFun (congrArg Epingle.Hom.f h) ⟨U.unop, x⟩
-    exact eq_of_heq (Sigma.mk.inj_iff.1 this).2
-
-include hmono in
-instance : (versEpingle hmono hend hsk).Full where
-  map_surjective {X Y} φ := by
-    refine ⟨ObjectProperty.homMk
-      { app := fun U => TypeCat.ofHom (appOfHom hend hsk
-          (hX := (admissible_iff hmono _).1 X.property)
-          (hY := (admissible_iff hmono _).1 Y.property) φ U.unop)
-        naturality := fun U V g => by
-          ext x
-          exact appOfHom_naturality hend hsk φ g.unop x }, ?_⟩
-    ext p
-    exact (f_eq_appOfHom hend hsk φ p).symm
-
-/-- **The presheaf of an `M`-pinned poset**: `X_K(D)` is the set of elements of type `D`, and
-`a : D' → D` acts by the pinning, `ξ ↦ u_ξ(D', a)`. -/
-def versPrefaisceau (K : Epingle M) : Mᵒᵖ ⥤ Type w where
-  obj U := {ξ : K.K // K.τ ξ = U.unop}
-  map {U V} g := TypeCat.ofHom fun ξ =>
-    ⟨K.u ξ.1 ⟨V.unop, g.unop ≫ eqToHom ξ.2.symm⟩, K.τ_u _ _⟩
-  map_id U := by
-    ext ⟨ξ, h⟩
-    change K.u ξ ⟨U.unop, 𝟙 _ ≫ eqToHom h.symm⟩ = ξ
-    obtain ⟨D⟩ := U
-    dsimp at h ⊢
-    subst h
-    simpa using K.u_top ξ
-  map_comp {U V W} g g' := by
-    ext ⟨ξ, h⟩
-    change K.u ξ ⟨W.unop, (g'.unop ≫ g.unop) ≫ eqToHom h.symm⟩ =
-      K.u (K.u ξ ⟨V.unop, g.unop ≫ eqToHom h.symm⟩) ⟨W.unop,
-        g'.unop ≫ eqToHom (K.τ_u ξ ⟨V.unop, g.unop ≫ eqToHom h.symm⟩).symm⟩
-    rw [K.u_u ξ ⟨V.unop, g.unop ≫ eqToHom h.symm⟩ ⟨W.unop, g'.unop⟩, Category.assoc]
-
-lemma versPrefaisceau_nonSingulier (K : Epingle M) : NonSingulier (versPrefaisceau K) := by
-  rintro D D' ⟨ξ, h⟩ a b hab
-  have := K.u_injective ξ (congrArg Subtype.val hab)
-  obtain ⟨-, h'⟩ := Sigma.mk.inj_iff.1 this
-  exact (cancel_mono _).1 (eq_of_heq h')
-
-lemma versPrefaisceau_le_iff (K : Epingle M) (p q : Elem (versPrefaisceau K)) :
-    (ordreElem hend hsk _).le p q ↔ p.2.1 ≤ q.2.1 := by
-  obtain ⟨D, ξ, hξ⟩ := p
-  obtain ⟨E, η, hη⟩ := q
-  dsimp at hξ hη ⊢
-  rw [le_elem_iff]
-  constructor
-  · rintro ⟨a, ha⟩
-    have h1 : K.u η ⟨D, a ≫ eqToHom hη.symm⟩ = ξ := congrArg Subtype.val ha
-    rw [← h1, ← Set.mem_Iic, ← K.u_range]
-    exact ⟨_, rfl⟩
-  · intro hle
-    rw [← Set.mem_Iic, ← K.u_range] at hle
-    obtain ⟨⟨F, c⟩, hc⟩ := hle
-    have hF : F = D := by
-      have := K.τ_u η ⟨F, c⟩
-      rw [hc] at this
-      exact this.symm.trans hξ
-    subst hF hξ hη
-    refine ⟨c, Subtype.ext ?_⟩
-    change K.u η ⟨_, c ≫ 𝟙 _⟩ = ξ
-    rw [Category.comp_id, hc]
-
-lemma versPrefaisceau_mk_eq (K : Epingle M) (ζ : K.K) (D : M) (h : K.τ ζ = D) :
-    (⟨K.τ ζ, ζ, rfl⟩ : Elem (versPrefaisceau K)) = ⟨D, ζ, h⟩ := by
-  subst h
-  rfl
-
-/-- `X_K` gives back `K`: the pinned poset of the presheaf of `K` is isomorphic to `K`. -/
-def isoVersPrefaisceau (K : Epingle M) :
-    versEpingleObj hend hsk (versPrefaisceau K) (versPrefaisceau_nonSingulier K) ≅ K where
-  hom :=
-    { f := fun p => p.2.1
-      strictMono := fun p q hpq => by
-        obtain ⟨h1, h2⟩ := lt_iff_le_not_ge.1 hpq
-        exact lt_iff_le_not_ge.2 ⟨(versPrefaisceau_le_iff hend hsk K p q).1 h1,
-          fun h => h2 ((versPrefaisceau_le_iff hend hsk K q p).2 h)⟩
-      τ_f := fun p => p.2.2
-      u_f := fun _ _ => rfl }
-  inv :=
-    { f := fun ξ => ⟨K.τ ξ, ξ, rfl⟩
-      strictMono := fun ξ η hξη => by
-        obtain ⟨h1, h2⟩ := lt_iff_le_not_ge.1 hξη
-        exact lt_iff_le_not_ge.2 ⟨(versPrefaisceau_le_iff hend hsk K _ _).2 h1,
-          fun h => h2 ((versPrefaisceau_le_iff hend hsk K _ _).1 h)⟩
-      τ_f := fun _ => rfl
-      u_f := fun ξ y => by
-        rw [versPrefaisceau_mk_eq K (K.u ξ y) y.1 (K.τ_u ξ y)]
-        refine Sigma.ext rfl (heq_of_eq (Subtype.ext ?_))
-        change K.u ξ y = K.u ξ ⟨y.1, (y.2 ≫ eqToHom _) ≫ eqToHom _⟩
-        simp }
-  hom_inv_id := by
-    ext ⟨D, ξ, h⟩
-    exact versPrefaisceau_mk_eq K ξ D h
-  inv_hom_id := rfl
-
-include hmono in
-instance : (versEpingle hmono hend hsk).EssSurj where
-  mem_essImage K :=
-    ⟨⟨versPrefaisceau K, (admissible_iff hmono _).2 (versPrefaisceau_nonSingulier K)⟩,
-      ⟨isoVersPrefaisceau hend hsk K⟩⟩
 
 include hmono in
 /-- **Page 13, « est équivalente à ».** For a skeletal `M` satisfying (i) and (ii), `X ↦ X̃` is

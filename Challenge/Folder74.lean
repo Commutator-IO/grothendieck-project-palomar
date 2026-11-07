@@ -107,6 +107,9 @@ def graph : SimpleGraph (Fin 3 ⊕ Pt X) where
       · exact D.sg_ne _ h.symm
       · exact D.Lk_irrefl _ h⟩
 
+@[simp] theorem adj_inl_inl (α β : Fin 3) :
+    D.graph.Adj (.inl α) (.inl β) ↔ α ≠ β := Iff.rfl
+
 @[simp] theorem adj_inl_inr (α : Fin 3) (p : Pt X) :
     D.graph.Adj (.inl α) (.inr p) ↔ p.1 = α := Iff.rfl
 

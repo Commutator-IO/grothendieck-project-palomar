@@ -59,6 +59,8 @@ variable {M}
 
 @[simp] theorem edge_a0 (d : D) : M.edge (M.a0 d) = M.edge d := (Quot.sound (.inl rfl)).symm
 
+@[simp] theorem edge_a2 (d : D) : M.edge (M.a2 d) = M.edge d := (Quot.sound (.inr rfl)).symm
+
 theorem a0_eq_iff {x y : D} : M.a0 x = y ↔ x = M.a0 y :=
   ⟨fun h => h ▸ (M.a0_a0 x).symm, fun h => h ▸ M.a0_a0 y⟩
 
@@ -259,6 +261,9 @@ theorem zpow_inv {α : Type*} (g : D → α) (h : ∀ x, g (X.phi x) = g x) (k :
     rw [show -(n : ℤ) - 1 = -1 + -n by ring, zpow_add, Equiv.Perm.mul_apply, zpow_neg_one, ← ih,
       ← h (X.phi⁻¹ _)]
     exact congrArg g ((Equiv.eq_symm_apply X.phi).mp rfl)
+
+omit [Fintype D] in
+@[simp] theorem vtx_phi1 (x : D) : X.M.vtx (X.phi x) = X.M.vtx x := by simp [phi_apply]
 
 omit [Fintype D] in
 @[simp] theorem vtx_phi (k : ℤ) (x : D) : X.M.vtx ((X.phi ^ k) x) = X.M.vtx x :=

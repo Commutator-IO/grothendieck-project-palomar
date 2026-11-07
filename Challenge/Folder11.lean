@@ -12,9 +12,6 @@ section Classes
 
 variable {k A : Type*} [CommRing k] [CommRing A] [Algebra k A] {B : Type*} [CommRing B] [Algebra k B] {I : Type*} (ι : I → A →ₐ[k] B)
 
-/-- The partial diagonal `δ_{ij}`, image of `Δ` by `(ιᵢ, ιⱼ)`. -/
-noncomputable def d (i j : I) : B := productMap (ι i) (ι j) D.Δ
-
 variable [DecidableEq I]
 
 /-- The product of the edge classes of a multigraph. -/
