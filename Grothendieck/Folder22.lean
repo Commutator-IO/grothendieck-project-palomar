@@ -429,6 +429,13 @@ abbrev K (I : Type*) := FractionRing (MvPolynomial I ℚ)
 instance (I : Type*) : Algebra.FormallyEtale (MvPolynomial I ℚ) (K I) :=
   Algebra.FormallyEtale.of_isLocalization (nonZeroDivisors (MvPolynomial I ℚ))
 
+/-- Under the full Mathlib import `K I` gets two `ℚ`-module structures that are not
+definitionally equal: `OreLocalization.instModuleOfIsScalarTower` (from `MvPolynomial I ℚ`) and
+the one of `DivisionRing.toRatAlgebra`, which `Ω[K I⁄ℚ]` uses. This section takes the latter,
+so that `(K I)⟦X⟧ ⊗[K I] Ω[K I⁄ℚ]` is a `ℚ`-module compatibly with `Algebra ℚ (K I)⟦X⟧`. -/
+noncomputable local instance (priority := high) moduleRatK (I : Type*) : Module ℚ (K I) :=
+  Algebra.toModule
+
 /-- The generator `x_i` of `k`. -/
 noncomputable abbrev x {I : Type*} (i : I) : K I := algebraMap (MvPolynomial I ℚ) (K I) (.X i)
 
@@ -436,14 +443,6 @@ noncomputable abbrev x {I : Type*} (i : I) : K I := algebraMap (MvPolynomial I �
 noncomputable def basisDx (I : Type*) : Module.Basis I (K I) Ω[K I⁄ℚ] :=
   ((KaehlerDifferential.mvPolynomialBasis ℚ I).baseChange (K I)).map
     (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale ℚ (MvPolynomial I ℚ) (K I))
-
--- TEMP diagnostics (CI only)
-example (I : Type) : Algebra ℚ (K I) := inferInstance
-example (I : Type) : Module ℚ (K I)⟦X⟧ := inferInstance
-example (I : Type) : SMulCommClass (K I) ℚ (K I)⟦X⟧ := inferInstance
-example (I : Type) : Module ℚ Ω[K I⁄ℚ] := inferInstance
-set_option trace.Meta.synthInstance true in
-example (I : Type) : Module ℚ ((K I)⟦X⟧ ⊗[K I] Ω[K I⁄ℚ]) := inferInstance
 
 theorem basisDx_apply (I : Type*) (i : I) :
     basisDx I i = KaehlerDifferential.D ℚ (K I) (x i) := by
