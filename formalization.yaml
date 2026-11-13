@@ -9,8 +9,10 @@ project:
     Alexandre Grothendieck kept at the University of Montpellier, one file per folder, in
     algebraic geometry, commutative algebra, category and topos theory, homotopy theory,
     combinatorics and geometry, with the general lemmas they need. The compared Challenge has
-    one headline theorem per proof file, 91 in all (CHALLENGE.md lists the choices), among them
-    the bigon-free dichotomy for combinatorial pseudoline arrangements (folder 80, page 24).
+    one headline theorem per proof file for 41 of the 91 files (Palomar limits the Challenge file
+    to 1,000 lines and 100 KiB; CHALLENGE.md lists all 91 and the 50 not compared, which are
+    proved in the library), among them the bigon-free dichotomy for combinatorial pseudoline
+    arrangements (folder 80, page 24).
   authors:
     - name: "Michel Hua"
       orcid: "0009-0002-8304-0683"
@@ -47,7 +49,9 @@ status:
   scope: >-
     The library holds the Lean proofs of the Hexagon paper 2611.00125, one file per folder of the
     working notes, and the general lemmas they use (Grothendieck/Upstream). The Challenge states
-    one headline theorem per proof file, 91 in all; Folder18 is left out because it states a
+    one headline theorem per proof file for 41 of the 91 files (the other 50 are built and proved,
+    not compared, because Palomar limits the Challenge file, and only it, to 1,000 lines and
+    100 KiB); Folder18 is left out because it states a
     conjecture as a definition and proves no theorem. 23 statements are representative choices
     where the paper has no single proved theorem for a folder (CHALLENGE.md). Definitions the
     statements depend on are copied verbatim and compared by type. All proofs are complete.

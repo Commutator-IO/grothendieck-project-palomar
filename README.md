@@ -12,7 +12,7 @@ flags labelled by lines) in which no line carries fewer than three vertices is f
 general position, or contains five lines in general position, a pencil of three and a pencil of
 two in which none of these five lines joins the two centres, or the complete quadrangle.
 
-- `Challenge.lean`: one headline theorem per file of `Grothendieck/`, stated with `sorry` together with the definitions it depends on, copied verbatim, in a single file that imports only Mathlib; `CHALLENGE.md` lists the choices, and the section from `Folder80Maps2` is the dichotomy above.
+- `Challenge.lean`: one headline theorem per file of `Grothendieck/` for 41 of the 91 files (Palomar limits the Challenge file, and only it, to 1,000 lines and 100 KiB; the library is not counted, and the other 50 headline theorems are proved there but not compared), stated with `sorry` together with the definitions it depends on, copied verbatim, in a single file that imports only Mathlib; `CHALLENGE.md` lists the choices, and the section from `Folder80Maps2` is the dichotomy above.
 - `Solution.lean` and `Grothendieck/`: the proofs of the challenged theorems, one file per folder, with the general lemmas in `Grothendieck/Upstream/`.
 - `comparator.json`, `formalization.yaml`: the Comparator configuration and the metadata.
 
