@@ -4,7 +4,7 @@ The Lean files under `StacksCore/` and `StacksFrontier/` in this directory are c
 **AxiomMath/Stacks**, <https://github.com/AxiomMath/Stacks>, a Lean formalization of the Stacks
 Project built on Mathlib.
 
-- Licence: Licensed under the Apache License 2.0; not covered by this repository's CC0 waiver.
+- Licence: Licensed under the Apache License 2.0, the licence of this repository as well (in the main grothendieck-project repository these files are excluded from its CC0 waiver).
   The licence text is in `LICENSE` next to this file, copied verbatim from the upstream
   repository.
 - Date of the copy: 2026-11-15, from the upstream default branch. The copy was taken without its
@@ -18,7 +18,7 @@ Project built on Mathlib.
 
 Only the import closure of the declarations used by this project's proofs, at the upstream module
 paths, so that `import StacksCore.…` and `import StacksFrontier.…` resolve (libraries
-`StacksCore` and `StacksFrontier` in `lean/lakefile.toml`, with `srcDir = "Stacks"`). Sixteen
+`StacksCore` and `StacksFrontier` in `lakefile.toml`, with `srcDir = "Stacks"`). Sixteen
 files:
 
 | File | Used for |
