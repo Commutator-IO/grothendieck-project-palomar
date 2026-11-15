@@ -20,3 +20,17 @@ roots = ["Solution"]
 [[lean_lib]]
 name = "Grothendieck"
 globs = ["Grothendieck.+"]
+
+# Vendored files of AxiomMath/Stacks (Apache-2.0), kept at their upstream module paths under
+# Stacks/; see Stacks/NOTICE.md. Their options are Stacks' own, and their warnings are not errors.
+[[lean_lib]]
+name = "StacksCore"
+srcDir = "Stacks"
+globs = ["StacksCore.+"]
+leanOptions = { warningAsError = false, autoImplicit = false, relaxedAutoImplicit = false, maxSynthPendingDepth = 3 }
+
+[[lean_lib]]
+name = "StacksFrontier"
+srcDir = "Stacks"
+globs = ["StacksFrontier.+"]
+leanOptions = { warningAsError = false, autoImplicit = false, relaxedAutoImplicit = false, maxSynthPendingDepth = 3 }

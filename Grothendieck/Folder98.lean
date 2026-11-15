@@ -24,8 +24,8 @@ gives, in a category with finite sums, a class `𝒩` of morphisms with (i) iden
 (ii) composition, (iii) base change, (iv) sums, (v) the quotients `(X^n_Y)/H`, `H ⊆ 𝔖_n`; a
 degree with (i bis) `deg id = 1`, (ii bis) `deg (vu) = deg v · deg u`, (iii bis) invariance under
 base change, (iv bis) additivity, (v bis) `deg ((X^n_Y)/H → Y) = card(E^n/H)` for `deg u = r`,
-`E = {1, …, r}`; and canonical sections `Can_{X/Y} : Y → Sym^r_Y(X)` with (i ter)
-`Can_{X/X} = id`, (ii ter) the transitivity diagram of page 11, (iii ter) base change,
+`E = {1, …, r}`; and canonical sections `Con_{X/Y} : Y → Sym^r_Y(X)` (written « Con » on the page) with (i ter)
+`Con_{X/X} = id`, (ii ter) the transitivity diagram of page 11, (iii ter) base change,
 (iv ter) additivity. Example I: `G`-sets, `u` of degree `r` when all its fibres have `r`
 elements, `Can_{X/Y}(y)` the class of the « suite de ses éléments rangés dans un ordre
 quelconque »; the page says (i)–(v) and (i bis)–(v bis) are « trivialement vérifiées » and that
@@ -196,7 +196,7 @@ theorem hasDeg_quotPow {u : X → Y} {r : ℕ} (hu : HasDeg u r) {n : ℕ}
   rw [← Nat.card_coe_set_eq, Nat.card_congr (Equiv.ofBijective g hg).symm]
 
 
-/-! ### The canonical sections `Can_{X/Y} : Y → Sym^r_Y(X)`: (i ter)–(iv ter) -/
+/-! ### The canonical sections `Con_{X/Y} : Y → Sym^r_Y(X)` (written « Con » on the page): (i ter)–(iv ter) -/
 
 /-- `Sym^r_Y(X) = (X^r_Y)/𝔖_r`: a point `y` and a multiset of `r` points of `u⁻¹(y)`. -/
 def SymY (u : X → Y) (r : ℕ) :=
@@ -235,7 +235,7 @@ def SymY.flatten {w : X → Z} {r s : ℕ} (p : SymY (fun q : SymY w r => q.1) s
       obtain ⟨q, hq, hxq⟩ := Multiset.mem_bind.1 hx
       rw [q.2.2.2 x hxq]; exact p.2.2.2 q hq⟩
 
-/-- (i ter): `Can_{X/X} = id`, the fibre of `id` over `x` being `{x}`. -/
+/-- (i ter): `Con_{X/X} = id`, the fibre of `id` over `x` being `{x}`. -/
 theorem can_id (x : X) : (Can hasDeg_id x).2.1 = {x} := by
   change (fib hasDeg_id x).val = {x}
   rw [← Finset.singleton_val]

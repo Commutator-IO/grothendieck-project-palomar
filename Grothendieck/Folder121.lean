@@ -42,8 +42,8 @@ What is formalised.
 * `subset_bd`: the edition's argument for « la plus grossière »: in a decomposition for which `Y`
   is a union of cells, a cell meeting the boundary of `Y` lies in it.
 
-Not formalised: the connected-cells version of page 16 (condition f)), the corollaries of
-page 15, the regular decompositions of page 17.
+The connected-cells version of page 16 (condition f)) is `page16`, below. Not formalised: the
+corollaries of page 15, the regular decompositions of page 17.
 -/
 
 namespace Grothendieck.Folder121

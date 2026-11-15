@@ -24,3 +24,7 @@ go through https://submit.palomar-registry.org/.
 Part of the work of the project
 [grothendieck-project](https://github.com/Commutator-IO/grothendieck-project), whose Lean files
 are under CC0; this repository is under Apache-2.0.
+
+The files under `Stacks/` (libraries `StacksCore` and `StacksFrontier`) are third-party, copied
+unchanged from [AxiomMath/Stacks](https://github.com/AxiomMath/Stacks) under the Apache License
+2.0, whose text is in `Stacks/LICENSE`, with the provenance in `Stacks/NOTICE.md`.

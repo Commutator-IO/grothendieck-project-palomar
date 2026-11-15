@@ -198,24 +198,37 @@ locally equivalent along every line differ by a reorientation: `χ' ∘ σ` is `
 `r` reversed. -/
 theorem reorientation_of_locallyEquivalent (hI : Incidence on) (hbf : BigonFree on)
     {χ χ' : L → L → L → ZMod 2} {σ : L → L}
-    (a12 : ∀ i j l, χ j i l = χ i j l + 1) (a23 : ∀ i j l, χ i l j = χ i j l + 1)
-    (a12' : ∀ i j l, χ' j i l = χ' i j l + 1) (a23' : ∀ i j l, χ' i l j = χ' i j l + 1)
+    (a12 : ∀ i j l, Basis on i j l → χ j i l = χ i j l + 1)
+    (a23 : ∀ i j l, Basis on i j l → χ i l j = χ i j l + 1)
+    (a12' : ∀ i j l, Basis on i j l → χ' (σ j) (σ i) (σ l) = χ' (σ i) (σ j) (σ l) + 1)
+    (a23' : ∀ i j l, Basis on i j l → χ' (σ i) (σ l) (σ j) = χ' (σ i) (σ j) (σ l) + 1)
     (H : LocallyEquivalent (on := on) χ χ' σ) :
     ∃ r : L → ZMod 2, ∀ i j l, Basis on i j l →
       χ' (σ i) (σ j) (σ l) = χ i j l + r i + r j + r l := by
+  classical
   obtain ⟨s, ε, hε⟩ := H
   refine ⟨s, fun i j l h => ?_⟩
-  -- step 2: `ψ` is symmetric, and of local form with `δ i j = ε i j + s j`
-  set ψ : L → L → L → ZMod 2 := fun i j l => χ' (σ i) (σ j) (σ l) + χ i j l + s i + s j + s l
+  -- step 2: `ψ`, set to `0` off the bases, is symmetric, and of local form with
+  -- `δ i j = ε i j + s j`
+  set ψ : L → L → L → ZMod 2 := fun i j l =>
+    if Basis on i j l then χ' (σ i) (σ j) (σ l) + χ i j l + s i + s j + s l else 0
   have two : (2 : ZMod 2) = 0 := rfl
   have s12 : ∀ i j l, ψ j i l = ψ i j l := fun i j l => by
-    simp only [ψ]; rw [a12, a12']; linear_combination two
+    by_cases hb : Basis on i j l
+    · simp only [ψ, hb, hb.swap12, ↓reduceIte]
+      rw [a12 i j l hb, a12' i j l hb]; linear_combination two
+    · have hb' : ¬Basis on j i l := fun h' => hb h'.swap12
+      simp only [ψ, hb, hb', ↓reduceIte]
   have s23 : ∀ i j l, ψ i l j = ψ i j l := fun i j l => by
-    simp only [ψ]; rw [a23, a23']; linear_combination two
+    by_cases hb : Basis on i j l
+    · simp only [ψ, hb, hb.swap23, ↓reduceIte]
+      rw [a23 i j l hb, a23' i j l hb]; linear_combination two
+    · have hb' : ¬Basis on i l j := fun h' => hb h'.swap23
+      simp only [ψ, hb, hb', ↓reduceIte]
   have hloc : LocalForm (on := on) ψ := ⟨fun i j => ε i j + s j, fun i j l h => by
-    simp only [ψ]; rw [hε i j l h]; linear_combination (χ i j l + s i) * two⟩
+    simp only [ψ, h, ↓reduceIte]; rw [hε i j l h]; linear_combination (χ i j l + s i) * two⟩
   have h0 := eq_zero s12 s23 hI hbf hloc h
-  simp only [ψ] at h0
+  simp only [ψ, h, ↓reduceIte] at h0
   linear_combination h0 - (χ i j l + s i + s j + s l) * two
 
 section RankTwo
@@ -284,7 +297,8 @@ def SameSeparation (χ χ' : L → L → L → ZMod 2) (σ : L → L) : Prop :=
 relation along every line are locally equivalent. -/
 theorem locallyEquivalent_of_sameSeparation (hI : Incidence on) (hbf : BigonFree on)
     {χ χ' : L → L → L → ZMod 2} {σ : L → L}
-    (a23 : ∀ i j l, χ i l j = χ i j l + 1) (a23' : ∀ i j l, χ' i l j = χ' i j l + 1)
+    (a23 : ∀ i j l, Basis on i j l → χ i l j = χ i j l + 1)
+    (a23' : ∀ i j l, Basis on i j l → χ' (σ i) (σ l) (σ j) = χ' (σ i) (σ j) (σ l) + 1)
     (H : SameSeparation (on := on) χ χ' σ) : LocallyEquivalent (on := on) χ χ' σ := by
   classical
   -- the class of `j` along `i` is the point `i ∩ j`
@@ -307,16 +321,24 @@ theorem locallyEquivalent_of_sameSeparation (hI : Incidence on) (hbf : BigonFree
       χ' (σ i) (σ j) (σ l) = χ i j l + s + ε j + ε l := by
     intro i
     let V := {j : L // i ≠ j}
-    let φ : V → V → ZMod 2 := fun j l => χ' (σ i) (σ j) (σ l) + χ i j l
+    let φ : V → V → ZMod 2 := fun j l =>
+      if Basis on i j l then χ' (σ i) (σ j) (σ l) + χ i j l else 0
     have hsym : ∀ j l, φ l j = φ j l := fun j l => by
-      simp only [φ]; rw [a23 i, a23' (σ i)]
-      linear_combination (norm := (ring_nf; reduce_mod_char))
+      by_cases hb : Basis on i j l
+      · simp only [φ, hb, hb.swap23, ↓reduceIte]
+        rw [a23 i j l hb, a23' i j l hb]
+        linear_combination (norm := (ring_nf; reduce_mod_char))
+      · have hb' : ¬Basis on i l j := fun h' => hb h'.swap23
+        simp only [φ, hb, hb', ↓reduceIte]
     have h4 : ∀ j k l m : V, c i j ≠ c i l → c i j ≠ c i m → c i k ≠ c i l → c i k ≠ c i m →
         φ j l + φ j m + φ k l + φ k m = 0 := by
       intro j k l m h1 h2 h3 h4
-      have e := H i j k l m ((basis_iff j.2 l.2).2 h1) ((basis_iff j.2 m.2).2 h2)
-        ((basis_iff k.2 l.2).2 h3) ((basis_iff k.2 m.2).2 h4)
-      simp only [φ]
+      have b1 := (basis_iff j.2 l.2).2 h1
+      have b2 := (basis_iff j.2 m.2).2 h2
+      have b3 := (basis_iff k.2 l.2).2 h3
+      have b4 := (basis_iff k.2 m.2).2 h4
+      have e := H i j k l m b1 b2 b3 b4
+      simp only [φ, b1, b2, b3, b4, ↓reduceIte]
       linear_combination (norm := (ring_nf; reduce_mod_char)) e
     -- three vertices on `i`, and a second line through each
     obtain ⟨p, q, r, hp, hq, hr, hpq, hpr, hqr⟩ := hbf i
@@ -333,7 +355,8 @@ theorem locallyEquivalent_of_sameSeparation (hI : Incidence on) (hbf : BigonFree
     refine ⟨s, fun j => if h : i ≠ j then ε ⟨j, h⟩ else 0, fun j l hB => ?_⟩
     have hj := hB.1; have hl := hB.2.1
     have := hε ⟨j, hj⟩ ⟨l, hl⟩ ((basis_iff hj hl).1 hB)
-    simp only [φ, ne_eq, hj, hl, not_false_eq_true, ↓reduceDIte] at this ⊢
+    simp only [φ, hB, ↓reduceIte] at this
+    simp only [ne_eq, hj, hl, not_false_eq_true, ↓reduceDIte] at this ⊢
     linear_combination (norm := (ring_nf; reduce_mod_char)) this
   choose s ε hε using local_i
   exact ⟨s, ε, hε⟩
@@ -344,8 +367,10 @@ by a reorientation. Only Folkman–Lawrence, from the reorientation to a homeomo
 reading of the separation relation on an actual arrangement, are left outside. -/
 theorem reorientation_of_sameSeparation (hI : Incidence on) (hbf : BigonFree on)
     {χ χ' : L → L → L → ZMod 2} {σ : L → L}
-    (a12 : ∀ i j l, χ j i l = χ i j l + 1) (a23 : ∀ i j l, χ i l j = χ i j l + 1)
-    (a12' : ∀ i j l, χ' j i l = χ' i j l + 1) (a23' : ∀ i j l, χ' i l j = χ' i j l + 1)
+    (a12 : ∀ i j l, Basis on i j l → χ j i l = χ i j l + 1)
+    (a23 : ∀ i j l, Basis on i j l → χ i l j = χ i j l + 1)
+    (a12' : ∀ i j l, Basis on i j l → χ' (σ j) (σ i) (σ l) = χ' (σ i) (σ j) (σ l) + 1)
+    (a23' : ∀ i j l, Basis on i j l → χ' (σ i) (σ l) (σ j) = χ' (σ i) (σ j) (σ l) + 1)
     (H : SameSeparation (on := on) χ χ' σ) :
     ∃ r : L → ZMod 2, ∀ i j l, Basis on i j l →
       χ' (σ i) (σ j) (σ l) = χ i j l + r i + r j + r l :=
